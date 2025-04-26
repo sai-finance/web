@@ -1,4 +1,4 @@
-// script.js - Updated Visitor Counter using SPECIFIC npoint.io URL
+// script.js - Visitor Counter Removed
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -101,71 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Visitor Counter (Using npoint.io) ---
-    const visitorCountElement = document.getElementById('visitor-counter');
-    // !! Using the specific URL provided by the user !!
-    const npointUrl = 'https://api.npoint.io/c936fa1da5716ef5ada9'; // Your Specific URL
-
-    async function updateVisitorCount() {
-        if (!visitorCountElement) {
-            console.error("Visitor count element not found (#visitor-counter). Check HTML Footer ID.");
-            return;
-        }
-        // No need for placeholder check now
-
-        visitorCountElement.textContent = "Loading..."; // Initial state
-
-        try {
-            // 1. GET current count
-            const getResponse = await fetch(npointUrl);
-            if (!getResponse.ok) {
-                // Provide more context in the error
-                throw new Error(`npoint GET failed for ${npointUrl}: ${getResponse.status} ${getResponse.statusText}`);
-            }
-            const data = await getResponse.json();
-
-            // Ensure data has the expected structure
-            if (typeof data !== 'object' || data === null || typeof data.visits !== 'number') {
-                console.error("npoint data format unexpected:", data);
-                throw new Error("Incorrect data format received from npoint.");
-            }
-
-            // 2. Increment count
-            const currentCount = data.visits;
-            const newCount = currentCount + 1;
-
-            // 3. Display new count IMMEDIATELY (optimistic update)
-            visitorCountElement.textContent = newCount.toLocaleString('en-IN');
-
-            // 4. PUT the updated count back
-            const updatedData = { visits: newCount };
-
-            const putResponse = await fetch(npointUrl, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (!putResponse.ok) {
-                // Log error but don't change displayed count as it was optimistic
-                console.error(`npoint PUT failed for ${npointUrl}: ${putResponse.status} ${putResponse.statusText}`);
-                // Optionally add a subtle visual indicator of save failure if desired
-                // visitorCountElement.style.color = 'orange'; // Example
-            } else {
-                // Optional: Confirm successful update in console
-                // console.log("npoint count updated successfully to:", newCount);
-            }
-
-        } catch (error) {
-            console.error('Error updating visitor count:', error);
-            visitorCountElement.textContent = "N/A"; // Show error state
-        }
-    }
-
-    // Call the function to update count when the page loads
-    updateVisitorCount();
+    // --- Visitor Counter Section REMOVED ---
 
 
     // --- Footer Year ---
