@@ -1,45 +1,41 @@
-/* style.css - Header Order Swap (Purple-to-Pink Gradients Correct) */
+/* style.css - FINAL FULL STYLESHEET */
 
-/* --- Base and Resets --- */
+/* --- Root Variables (Purple/Pink Header Gradient Theme) --- */
 :root {
-    /* Base Deep Blue Theme (Used outside Header Button/Logo) */
-    --primary-color: #002a5c;
-    --secondary-color: #0056b3;
-    --accent-color: #00aaff;   /* Cyan */
-
-    /* Purple-to-Pink Gradient Colors (For Header Button & Logo) */
-    --purple-color: #a770ef;
-    --pink-color: #ef476f;
-
+    /* Deep Blue Theme Base */
+    --primary-color: #002a5c; --secondary-color: #0056b3; --accent-color-cyan: #00aaff;
+    /* Purple-to-Pink Gradient Colors */
+    --purple-color: #a770ef; --pink-color: #ef476f;
+    /* Solid Button Colors */
+    --hero-apply-solid: #7e5bef; --hero-inquiry-solid: var(--purple-color); --contact-inquiry-solid: var(--purple-color);
+    --hero-apply-solid-hover: #6a4acf; --hero-inquiry-solid-hover: #935ce6; --contact-inquiry-solid-hover: #935ce6;
     /* Gradients */
     --gradient-hero: linear-gradient(100deg, #001f44 0%, var(--primary-color) 100%);
-    --gradient-button-primary: linear-gradient(to right, var(--primary-color) 0%, var(--secondary-color) 100%); /* Hero/Default Btn 1 */
-    /* Header Btn & Logo Text Gradient - Purple to Pink */
-    --gradient-header: linear-gradient(to right, var(--purple-color) 0%, var(--pink-color) 100%);
-    /* Hover Gradients */
-    --gradient-button-primary-hover: linear-gradient(to right, #001f44 0%, #00418a 100%);
-    --gradient-header-hover: linear-gradient(to right, #935ce6 0%, #e03a60 100%); /* Darker/Shifted Purple/Pink */
-
+    --gradient-header-btn-logo: linear-gradient(to right, var(--purple-color) 0%, var(--pink-color) 100%); /* Purple to Pink */
+    --gradient-header-btn-logo-hover: linear-gradient(to right, #935ce6 0%, #e03a60 100%);
     /* Other colors */
-    --light-blue-bg: #e6f0ff;
-    --light-gray-bg: #f8f9fa;
-    --white-color: #ffffff;
-    --dark-text-color: #212529;
-    --medium-text-color: #6c757d;
-    --border-color: #dee2e6;
-    --success-color: #198754;
-    --error-color: #dc3545;
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.075);
-    --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
-    --header-height: 70px;
-    --font-family: 'Poppins', sans-serif;
-    --border-radius: 5px;
+    --light-blue-bg: #e6f0ff; --light-gray-bg: #f8f9fa; --white-color: #ffffff;
+    --dark-text-color: #212529; --medium-text-color: #6c757d; --border-color: #dee2e6;
+    --success-color: #198754; --error-color: #dc3545;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.075); --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+    --header-height: 70px; --top-bar-height: 35px;
+    --font-family: 'Poppins', sans-serif; --border-radius: 5px;
+    --gradient-credit-report: linear-gradient(135deg, #f3e8fd 0%, #e6f0ff 100%);
 }
 
-/* --- Base Styles (Keep as before) --- */
+/* --- Base Styles --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); font-size: 16px; }
-body { font-family: var(--font-family); line-height: 1.7; color: var(--dark-text-color); background-color: var(--white-color); display: flex; flex-direction: column; min-height: 100vh; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + var(--top-bar-height)); /* Offset for BOTH bars */
+    font-size: 16px;
+}
+body {
+    font-family: var(--font-family); line-height: 1.7; color: var(--dark-text-color);
+    background-color: var(--white-color); display: flex; flex-direction: column;
+    min-height: 100vh; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    padding-top: calc(var(--header-height) + var(--top-bar-height)); /* Offset for BOTH bars */
+}
 main { flex-grow: 1; }
 .container { width: 90%; max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; }
 img { max-width: 100%; height: auto; display: block; }
@@ -48,92 +44,96 @@ a:hover { color: var(--primary-color); text-decoration: underline; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* --- Buttons --- */
-.btn {
-    display: inline-block; padding: 0.7rem 1.5rem; border: none;
-    border-radius: var(--border-radius); font-size: 1rem; font-weight: 600;
-    cursor: pointer; text-decoration: none; text-align: center;
-    transition: background-color 0.3s ease, background-image 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    line-height: 1.5; color: var(--white-color);
-}
-.primary-btn { /* Default Primary (Blue Gradient) */
-    background-color: var(--primary-color); background-image: var(--gradient-button-primary);
-}
-.primary-btn:hover { background-image: var(--gradient-button-primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); color: var(--white-color); text-decoration: none; }
-.secondary-btn { /* Default Secondary (Solid Blue) */
-    background-color: var(--secondary-color);
-}
-.secondary-btn:hover { background-color: #00418a; transform: translateY(-2px); box-shadow: var(--shadow-sm); color: var(--white-color); text-decoration: none; }
-
-/* Header Apply Button - Purple to Pink Gradient */
-.apply-header-btn {
-    padding: 6px 14px; font-size: 0.9rem;
-    background-color: var(--purple-color); /* Fallback */
-    background-image: var(--gradient-header); /* Apply Purple/Pink gradient */
-    box-shadow: var(--shadow-sm); border: none;
-}
-.apply-header-btn:hover {
-    background-image: var(--gradient-header-hover); /* Darker/Shifted */
-    transform: translateY(-2px); box-shadow: var(--shadow-md);
-    color: var(--white-color); text-decoration: none;
-}
-
+.btn { display: inline-block; padding: 0.7rem 1.5rem; border: none; border-radius: var(--border-radius); font-size: 1rem; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; transition: background-color 0.3s ease, background-image 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; line-height: 1.5; color: var(--white-color); }
+/* Gradient Buttons */
+.apply-header-btn, .hero-apply-btn, .calculator-calculate-btn, .contact-apply-btn, .cibil-btn { background-color: var(--purple-color); background-image: var(--gradient-header-btn-logo); color: var(--white-color); border: none; }
+.apply-header-btn:hover, .hero-apply-btn:hover, .calculator-calculate-btn:hover, .contact-apply-btn:hover, .cibil-btn:hover { background-image: var(--gradient-header-btn-logo-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); color: var(--white-color); text-decoration: none; }
+.apply-header-btn { padding: 6px 14px; font-size: 0.9rem; box-shadow: var(--shadow-sm); }
+.apply-header-btn:hover { box-shadow: var(--shadow-md); }
+/* Solid Buttons */
+.hero-inquiry-btn { background-color: var(--hero-inquiry-solid); }
+.hero-inquiry-btn:hover { background-color: var(--hero-inquiry-solid-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.contact-inquiry-btn { background-color: var(--contact-inquiry-solid); }
+.contact-inquiry-btn:hover { background-color: var(--contact-inquiry-solid-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+/* Other Buttons */
+.experian-btn { background-color: var(--accent-color-cyan); }
+.experian-btn:hover { background-color: #0088cc; }
+.resources-download-btn { background-color: var(--secondary-color); }
+.resources-download-btn:hover { background-color: #00418a; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 .link-btn { background: transparent; color: var(--primary-color); padding: 0.5rem 1rem; border: 1px solid var(--primary-color); margin-top: auto; align-self: center; }
 .link-btn:hover { background: var(--primary-color); color: var(--white-color); text-decoration: none; transform: translateY(-1px); }
 
 
-/* --- Header / Navigation --- */
-.header { background: var(--white-color); box-shadow: var(--shadow-sm); position: fixed; width: 100%; top: 0; z-index: 1000; height: var(--header-height); display: flex; align-items: center; }
-.header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-.logo { display: flex; align-items: center; text-decoration: none; }
+/* --- Top Bar --- */
+#top-bar { background-color: var(--primary-color); color: var(--white-color); padding: 5px 0; height: var(--top-bar-height); position: fixed; width: 100%; top: 0; z-index: 1001; display: flex; align-items: center; }
+.top-bar-container { display: flex; justify-content: flex-end; /* Align content RIGHT */ align-items: center; width: 100%; }
+.top-bar-whatsapp a { display: flex; align-items: center; text-decoration: none; color: var(--white-color); font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease; }
+.top-bar-whatsapp a:hover { opacity: 0.85; text-decoration: none; }
+.top-bar-whatsapp .whatsapp-icon { color: #25D366; font-size: 1.4rem; margin-right: 8px; }
 
-@keyframes waveAnimation { /* Keep wave animation */
-  0%, 100% { transform: translateY(0); } 25% { transform: translateY(-3px); } 75% { transform: translateY(2px); }
+
+/* --- Header / Navigation (Logo Left | Nav Mid | Apply Right) --- */
+.header { background: var(--white-color); box-shadow: var(--shadow-sm); position: fixed; width: 100%; top: var(--top-bar-height); z-index: 1000; height: var(--header-height); display: flex; align-items: center; }
+.header-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
 }
 
-/* Logo Text - Purple to Pink Gradient */
-.logo-text {
-    background: var(--gradient-header); /* Apply Purple/Pink gradient */
-    background-clip: text; -webkit-background-clip: text; color: transparent;
-    font-weight: 700; font-size: 1.6rem; padding: 5px;
-    display: inline-block; animation: waveAnimation 3s ease-in-out infinite;
-}
+/* Logo Left */
+.logo { order: 1; flex-shrink: 0; margin-right: auto; text-decoration: none; }
+.logo-text { background: var(--gradient-header-btn-logo); background-clip: text; -webkit-background-clip: text; color: transparent; font-weight: 700; font-size: 1.6rem; padding: 5px; display: inline-block; }
 
-/* Navbar (Keep as before - using blue theme colors for links) */
-.navbar ul { list-style: none; display: flex; gap: 0.5rem; }
-.nav-link { text-decoration: none; color: var(--dark-text-color); font-weight: 600; padding: 8px 12px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-bottom-color 0.3s ease; position: relative; background: none; background-clip: initial; -webkit-background-clip: initial; }
-.nav-link::after { content: ''; position: absolute; width: 0; height: 3px; bottom: -1px; left: 50%; background-color: var(--secondary-color); transition: all 0.3s ease-out; transform: translateX(-50%); }
-.nav-link:hover::after, .nav-link.active::after { width: 80%; }
+/* Navigation Middle */
+.navbar { order: 2; flex-grow: 1; flex-shrink: 1; min-width: 0; text-align: center; overflow: hidden; margin: 0 5px; }
+.navbar ul { list-style: none; display: inline-flex; justify-content: center; gap: 4px; padding: 0; margin: 0; flex-wrap: nowrap; }
+.nav-link { text-decoration: none; color: var(--dark-text-color); font-weight: 600; padding: 8px 4px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-bottom-color 0.3s ease; white-space: nowrap; display: block; }
 .nav-link:hover, .nav-link.active { color: var(--primary-color); border-bottom-color: var(--secondary-color); text-decoration: none; }
 
-.mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; padding: 5px; line-height: 1; }
+/* Apply Button Right */
+.apply-header-btn { order: 3; flex-shrink: 0; }
 
-/* --- Section Styling & Specific Sections (Keep as before) --- */
-/* ... Paste the rest of the CSS from the previous version here ... */
-/* (Ensure Hero uses the blue gradient, not purple) */
-/* --- Section Styling (Keep most as before) --- */
+/* Mobile Toggle (Rightmost) */
+.mobile-menu-toggle { order: 4; display: none; background: none; border: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; padding: 5px; line-height: 1; margin-left: 10px; }
+
+
+/* --- Section Styling & Specific Sections --- */
 .section-padding { padding-top: 60px; padding-bottom: 60px; }
 section:nth-child(even) { background-color: var(--light-gray-bg); }
 .section-title { text-align: center; margin-bottom: 25px; font-size: 2.1rem; color: var(--primary-color); font-weight: 700; }
 .section-subtitle { text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: var(--medium-text-color); max-width: 700px; margin-left: auto; margin-right: auto; }
 .card { background: var(--white-color); padding: 25px; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); margin-bottom: 20px; transition: box-shadow 0.3s ease, transform 0.3s ease; }
 .card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-
-/* --- Specific Sections --- */
-/* Hero - Reverted to Blue Gradient */
-.hero { display: flex; align-items: center; justify-content: center; background-color: var(--primary-color); background-image: var(--gradient-hero); min-height: 85vh; padding-top: calc(var(--header-height) + 40px); padding-bottom: 60px; text-align: center; overflow: hidden; }
+.hero { display: flex; align-items: center; justify-content: center; background-color: var(--primary-color); background-image: var(--gradient-hero); min-height: 85vh; padding-top: 60px; padding-bottom: 60px; text-align: center; overflow: hidden; }
 .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; color: var(--white-color); font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 .hero .subtitle { font-size: clamp(1rem, 3vw, 1.3rem); margin-bottom: 2rem; color: var(--white-color); opacity: 0.9; }
 .hero-buttons .btn { margin: 0.5rem; }
-/* Hero buttons use default .primary-btn and .secondary-btn styles */
-
-/* About */
 .about p { max-width: 800px; margin: 0.8rem auto; text-align: center; }
-/* Services */
+.our-impact { margin-top: 40px; padding: 30px; background-color: var(--light-blue-bg); border-left: 5px solid var(--primary-color); }
+.our-impact h3 { text-align: center; color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem; }
+.impact-stats { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; }
+.stat-item { text-align: center; flex: 1; min-width: 150px; }
+.stat-icon { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 10px; }
+.stat-number { display: block; font-size: 2.2rem; font-weight: 700; color: var(--primary-color); line-height: 1.2; }
+.stat-label { font-size: 0.9rem; color: var(--medium-text-color); font-weight: 600; }
+.credit-report-section { background-color: var(--primary-color); background-image: var(--gradient-credit-report); }
+.credit-report-section .section-title { color: var(--primary-color); }
+.highlight-gradient { background: var(--gradient-header-btn-logo); background-clip: text; -webkit-background-clip: text; color: transparent; padding: 0 5px; }
+.credit-report-links { display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; margin-bottom: 40px; }
+.credit-report-btn { padding: 12px 25px; font-size: 1.1rem; border-radius: 30px; box-shadow: var(--shadow-md); display: inline-flex; align-items: center; gap: 10px; }
+.credit-report-btn i { font-size: 1.2rem; }
+.credit-report-details { margin-top: 30px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); }
+.credit-report-details h3 { text-align: center; color: var(--primary-color); margin-bottom: 20px; }
+.report-details-columns { display: flex; flex-wrap: wrap; gap: 30px; }
+.report-column { flex: 1; min-width: 280px; }
+.report-column h4 { color: var(--secondary-color); margin-bottom: 10px; }
+.report-column ul { list-style: disc; padding-left: 20px; font-size: 0.95rem; color: var(--dark-text-color); }
+.report-column li { margin-bottom: 8px; }
 .service-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 .service-item { display: flex; flex-direction: column; text-align: center; /* Uses .card styles */ }
 .service-item h3 { color: var(--secondary-color); margin-bottom: 15px; }
 .service-item p { flex-grow: 1; margin-bottom: 15px; }
-/* Interest Rates & Banks */
 .interest { background-color: var(--light-gray-bg); }
 .interest-content { display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-around; }
 .interest-content .rates, .interest-content .banks { flex: 1 1 350px; /* Uses .card styles */ }
@@ -141,20 +141,22 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .interest-content ul { list-style: none; }
 .interest-content li { margin: 0.6rem 0; position: relative; padding-left: 20px; }
 .interest-content li::before { content: '✔'; position: absolute; left: 0; color: var(--success-color); font-weight: bold; }
-/* Fees & Charges */
+.dsa-codes { margin-top: 30px; border-top: 2px solid var(--primary-color); padding-top: 25px; background-color: var(--light-blue-bg); }
+.dsa-codes h3 { color: var(--primary-color); margin-bottom: 15px; text-align: center; font-size: 1.3rem; }
+.dsa-codes p { text-align: center; margin-bottom: 15px; color: var(--medium-text-color); }
+.dsa-codes ul { list-style: none; padding: 0; max-width: 600px; margin: 0 auto 15px auto; text-align: center; }
+.dsa-codes li { margin: 0.5rem 0; font-size: 0.95rem; }
 .fees { background-color: var(--white-color); }
 .fees-list { list-style: none; padding: 25px; max-width: 800px; margin: 0 auto; background-color: var(--light-blue-bg); /* Applied .card styles in HTML */ }
 .fees-list li { margin: 0.9rem 0; padding-bottom: 0.9rem; border-bottom: 1px dashed var(--border-color); }
 .fees-list li:last-child { border-bottom: none; }
 .fees-list li strong { color: var(--primary-color); }
-/* Eligibility & Documents */
 .eligibility { background-color: var(--light-gray-bg); }
 .eligibility-content { display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-around; }
 .eligibility-content > .card { flex: 1 1 350px; /* Uses .card styles */ }
 .eligibility-content h3 { color: var(--secondary-color); margin-top: 0; margin-bottom: 15px; }
 .eligibility-content ul { list-style: disc; padding-left: 25px; }
 .eligibility-content li { margin: 0.6rem 0; }
-/* Calculator */
 .calculator-section { background-color: var(--white-color); }
 .calculator-form { display: flex; flex-direction: column; gap: 1rem; max-width: 550px; margin: 30px auto; padding: 30px; /* Applied .card styles in HTML */ }
 .calculator-form .form-group { margin-bottom: 0.8rem; }
@@ -170,26 +172,24 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .calculator-result p { margin: 10px 0; }
 .calculator-result strong { color: var(--dark-text-color); }
 .error-message { color: var(--error-color); text-align: center; margin-top: 10px; min-height: 1em; font-weight: 600; }
-/* Resources */
 .resources { background-color: var(--light-gray-bg); text-align: center; }
 .resources p { margin-bottom: 25px; color: var(--medium-text-color); }
-/* Quick Links */
 .quick-links { background-color: var(--white-color); }
 .quick-links nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 .quick-links li a { color: var(--primary-color); background-color: var(--light-blue-bg); padding: 8px 18px; border-radius: 20px; font-weight: 600; transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; }
 .quick-links li a:hover { background-color: var(--primary-color); color: var(--white-color); text-decoration: none; box-shadow: var(--shadow-sm); }
-/* FAQ */
+/* Corrected FAQ Styles */
 .faq { background-color: var(--light-gray-bg); }
 .faq-list { max-width: 850px; margin: 0 auto; }
-.faq-item { margin-bottom: 1rem; background: var(--white-color); border-radius: var(--border-radius); border: 1px solid var(--border-color); overflow: hidden; transition: box-shadow 0.3s ease; }
+.faq-item { margin-bottom: 1rem; background: var(--white-color); border-radius: var(--border-radius); border: 1px solid var(--border-color); transition: box-shadow 0.3s ease; }
 .faq-item:hover { box-shadow: var(--shadow-sm); }
 .faq-item summary { cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem 1.5rem; position: relative; outline: none; transition: background-color 0.2s ease; list-style: none; }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary:hover { background-color: #f0f0f0; }
+.faq-item summary::before { content: ''; display: inline-block; width: 10px; }
 .faq-item summary::after { content: '▼'; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%) rotate(0deg); transition: transform 0.3s ease-in-out; color: var(--primary-color); font-size: 0.8em; }
-.faq-item[open] summary::after { transform: translateY(-50%) rotate(180deg); }
-.faq-item div { padding: 0 1.5rem 1rem 1.5rem; border-top: 1px solid var(--border-color); }
-.faq-item p { margin: 0.8rem 0 0 0; }
+.faq-item[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
+.faq-item p { padding: 1rem 1.5rem; margin: 0; border-top: 1px solid var(--border-color); }
 /* Contact */
 .contact { background-color: var(--white-color); text-align: center; }
 .contact-info { margin: 30px auto; padding: 25px; line-height: 1.9; max-width: 600px; border-left: 5px solid var(--secondary-color); text-align: left; /* Applied .card styles in HTML */ }
@@ -200,64 +200,65 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 /* Footer */
 .footer { background: var(--primary-color); color: var(--light-gray-bg); text-align: center; padding: 2rem 0; margin-top: auto; }
 .footer p { margin: 8px 0; font-size: 0.9rem;}
-.footer a { color: var(--accent-color); /* Cyan links */ }
+.footer a { color: var(--accent-color-cyan); }
 .footer a:hover { color: var(--white-color); }
-.footer-note { font-size: 0.8em; opacity: 0.7; }
 
 
-/* --- Responsive Design (Keep as before) --- */
+/* --- Responsive Design --- */
+@media (max-width: 1100px) { /* Adjust nav link padding sooner */
+    .nav-link { padding: 8px 5px; font-size: 0.85rem; }
+    .logo-text { font-size: 1.4rem; }
+    .apply-header-btn { padding: 6px 10px; font-size: 0.85rem; }
+    .header-container { gap: 10px; }
+}
+
 @media (max-width: 992px) {
     html { font-size: 15px; }
-    .navbar ul { gap: 0.2rem; }
-    .nav-link { padding: 8px 8px; font-size: 0.9rem; }
-    .apply-header-btn { /* Keep hidden or adjust if needed */
-         display: none;
-    }
+    .header-container { flex-wrap: wrap; padding-bottom: 10px; }
+    /* Mobile Order: Logo | Toggle | Apply -> Nav below */
+    .logo { order: 1; margin-right: auto; } /* Logo Left */
+    .mobile-menu-toggle { order: 2; display: block; margin-left: 15px; } /* Show toggle */
+    .apply-header-btn { order: 3; } /* Apply Right */
+    .navbar { order: 4; width: 100%; margin: 10px 0 0 0; display: none; } /* Nav below, hidden */
+    .navbar.active { display: flex; flex-direction: column; align-items: center; }
+    .navbar.active ul { flex-direction: column; gap: 0.5rem; width: 100%; text-align: center; }
+    .navbar.active .nav-link { width: 100%; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 1rem; }
+    .navbar.active .nav-link.active, .navbar.active .nav-link:hover { border-bottom-color: var(--primary-color); background-color: #f0f0f0; }
     .section-title { font-size: 1.9rem; }
 }
+
 @media (max-width: 768px) {
-    html { scroll-padding-top: 0px; }
-    .header { height: auto; position: relative; }
-    .header-container { flex-direction: row; flex-wrap: wrap; justify-content: space-between; /* Space between for Btn/Logo */ padding-bottom: 10px; }
-    .apply-header-btn { order: 1; margin-right: auto; /* Push button left */ display: inline-block; /* Make sure it shows */ }
-    .logo { order: 3; margin-left: auto; /* Push logo right */}
-    .mobile-menu-toggle { order: 4; /* Keep toggle far right */}
-    .navbar { order: 5; /* Nav comes last when stacked */ display: none; width: 100%; margin-top: 10px; }
-    .navbar.active { display: flex; flex-direction: column; align-items: center; }
-    .navbar ul { flex-direction: column; gap: 0.5rem; width: 100%; text-align: center; }
-    .nav-link { width: 100%; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
-    .nav-link.active, .nav-link:hover { border-bottom-color: var(--primary-color); background-color: #f0f0f0; }
-    .nav-link::after { display: none; }
-    .mobile-menu-toggle { display: block; /* Show hamburger */ }
+    html { scroll-padding-top: var(--header-height); } /* Re-adjust for single header potentially */
+    body { padding-top: var(--header-height); } /* Re-adjust */
+    #top-bar { display: none; /* Hide top bar completely on small screens */ }
+    .header { top: 0; } /* Header back to top */
+    /* Keep 992px mobile layout for header */
 
-    .hero { min-height: 60vh; padding-top: 40px; padding-bottom: 40px;}
+    .hero { padding-top: 40px; min-height: 60vh; }
     .hero h1 { font-size: 2rem; }
-
     .section-padding { padding: 40px 0; }
     .section-title { font-size: 1.8rem; margin-bottom: 20px;}
     .section-subtitle { font-size: 1rem; margin-bottom: 25px; }
-
+    .impact-stats { flex-direction: column; gap: 30px;}
+    .report-details-columns { flex-direction: column; }
     .interest-content, .eligibility-content { flex-direction: column; align-items: stretch; gap: 20px; }
     .interest-content > div, .eligibility-content > .card { flex-basis: auto; width: 100%; }
-
     .calculator-form { padding: 20px; }
 }
+
 @media (max-width: 480px) {
     html { font-size: 14px; }
     .container { width: 95%; }
+    .header-container { gap: 8px; }
+    .logo-text { font-size: 1.2rem; } /* Smaller logo */
+    .apply-header-btn { padding: 5px 8px; font-size: 0.75rem; } /* Smaller button */
+
     .hero h1 { font-size: 1.8rem; }
     .hero .subtitle { font-size: 0.9rem; }
-    .btn { padding: 0.7rem 1.2rem; font-size: 0.9rem;}
+    .btn { padding: 0.6rem 1.1rem; font-size: 0.9rem;}
     .section-title { font-size: 1.6rem; }
     .service-list { grid-template-columns: 1fr; }
     .quick-links li a { padding: 6px 14px; font-size: 0.9rem;}
-    .faq-item summary { padding-right: 35px; }
+    .faq-item summary { padding-right: 30px; }
     .faq-item summary::after { right: 1rem; }
-    .apply-header-btn { /* Ensure button fits on small mobile */
-        padding: 5px 10px;
-        font-size: 0.85rem;
-    }
-    .logo-text {
-        font-size: 1.4rem; /* Slightly smaller logo text */
-    }
 }

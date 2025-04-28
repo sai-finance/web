@@ -28,7 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.navbar a[href^="#"]');
     const sections = document.querySelectorAll('main section[id]');
     const header = document.getElementById('header');
-    const headerHeight = header ? header.offsetHeight : 70; // Use dynamic or default height
+    // Adjust for single fixed header height (as top bar is hidden on mobile)
+    const headerHeight = header?.offsetHeight || 70;
+     const topBarHeight = document.getElementById('top-bar')?.offsetHeight || 0;
+     // Calculate effective offset based on screen width
+     const scrollOffset = window.innerWidth <= 768 ? headerHeight : headerHeight + topBarHeight;
+
 
     const removeActiveClasses = () => {
         navLinks.forEach(link => {
@@ -37,11 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Adjust rootMargin based on effective fixed height
     const observerOptions = {
         root: null,
-        rootMargin: `-${window.innerWidth <= 768 ? 10 : headerHeight + 10}px 0px -45% 0px`,
+        rootMargin: `-${scrollOffset + 10}px 0px -45% 0px`,
         threshold: 0
     };
+
 
     const observer = new IntersectionObserver((entries) => { // Observer logic remains same
         let latestIntersectingEntry = null;
@@ -63,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else { /* ... fallback logic ... */
              const scrollY = window.scrollY;
               const isNearBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 100;
-              const isNearTop = scrollY < window.innerHeight * 0.3;
+              // Adjust near top check for effective fixed header height
+              const isNearTop = scrollY < (window.innerHeight * 0.3) - scrollOffset;
+
               if (isNearBottom && navLinks.length > 0) {
                  removeActiveClasses();
                  const lastLink = navLinks[navLinks.length - 1];
