@@ -68,7 +68,7 @@ async function connectClient() {
         setLoadingState(false);
         if (messagesContainer && messagesContainer.children.length === 0) {
             // Display welcome based on current language
-            appendMessage(currentLanguage === 'en' ? "Hi! I'm Subha, your Sai Finance assistant. How can I help you today?" : "வணக்கம்! நான் சுபா, உங்கள் சாய் ஃபைனான்ஸ் உதவியாளர். நான் உங்களுக்கு எப்படி உதவ முடியும்?", 'bot');
+            appendMessage(currentLanguage === 'en' ? "Hi! I'm Subha AI, your Sai Finance assistant. How can I help you today?" : "வணக்கம்! நான் சுபா AI, உங்கள் சாய் ஃபைனான்ஸ் உதவியாளர். நான் உங்களுக்கு எப்படி உதவ முடியும்?", 'bot');
         }
         isConnecting = false;
     } catch (error) {

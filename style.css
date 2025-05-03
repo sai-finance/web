@@ -1,6 +1,6 @@
-/* style.css - FINAL FULL CODE - Website + Chat Widget Styles */
+/* style.css - FINAL FULL CODE - Corrected Header & Mobile Nav Display */
 
-/* --- Root Variables (Keep Purple/Pink Header Gradient Theme) --- */
+/* --- Root Variables (Purple/Pink Header Gradient Theme) --- */
 :root {
     /* Deep Blue Theme Base */
     --primary-color: #002a5c; --secondary-color: #0056b3; --accent-color-cyan: #00aaff;
@@ -25,8 +25,17 @@
 
 /* --- Base Styles --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + var(--top-bar-height)); font-size: 16px; }
-body { font-family: var(--font-family); line-height: 1.7; color: var(--dark-text-color); background-color: var(--white-color); display: flex; flex-direction: column; min-height: 100vh; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding-top: calc(var(--header-height) + var(--top-bar-height)); }
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + var(--top-bar-height));
+    font-size: 16px;
+}
+body {
+    font-family: var(--font-family); line-height: 1.7; color: var(--dark-text-color);
+    background-color: var(--white-color); display: flex; flex-direction: column;
+    min-height: 100vh; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    padding-top: calc(var(--header-height) + var(--top-bar-height));
+}
 main { flex-grow: 1; }
 .container { width: 90%; max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; }
 a { color: var(--secondary-color); text-decoration: none; transition: color 0.3s ease; }
@@ -65,7 +74,7 @@ a:hover { color: var(--primary-color); text-decoration: underline; }
 .top-bar-whatsapp i { font-size: 1.4rem; margin-right: 8px; }
 .top-bar-whatsapp .whatsapp-icon { color: #25D366; }
 .top-bar-translate .fa-language { color: var(--white-color); }
-.whatsapp-number { display: inline; }
+.whatsapp-number { display: inline; } /* Keep visible */
 
 
 /* --- Header / Navigation (Logo Left | Nav Mid | Apply Right) --- */
@@ -248,11 +257,31 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 }
 
 @media (max-width: 768px) {
-    html { scroll-padding-top: var(--header-height); }
-    body { padding-top: var(--header-height); }
-    #top-bar { display: none; }
-    .header { top: 0; }
+    html { scroll-padding-top: calc(var(--header-height) + var(--top bar-height)); }
+    body { padding-top: calc(var(--header-height) + var(--top-bar-height)); }
+    /*#top-bar { display: none; }*/
+    .header { top: var(--top-bar-height); }
+
+    /* Hide text in top bar on smaller screens */
+    .top-bar-whatsapp span,
+    .top-bar-translate span {
+        display: none;
+    }
+    .top-bar-whatsapp .whatsapp-icon,
+    .top-bar-translate i {
+        margin-right: 0; /* Remove margin when text hidden */
+    }
+    .top-bar-container {
+        /* Adjust padding if needed */
+        padding-left: 10px;
+        padding-right: 10px;
+    }
     /* Keep 1180px mobile layout for header elements */
+    logo { order: 1; margin-right: auto; }
+    .mobile-menu-toggle { order: 2; display: block; }
+    .apply-header-btn { order: 3; margin-left: 10px; }
+    .navbar { order: 4; }
+    
 
     .hero { padding-top: 40px; min-height: 60vh; }
     .hero h1 { font-size: 2rem; }

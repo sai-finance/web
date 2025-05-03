@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sai-finance.github.io/web/sitemap.xml
