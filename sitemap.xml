@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sai-finance.github.io/web/</loc> <!-- YOUR DEPLOYED URL -->
+    <lastmod>2025-05-01</lastmod> <!-- Optional: Update date when content changes significantly -->
+    <changefreq>monthly</changefreq> <!-- How often content might change -->
+    <priority>1.0</priority> <!-- Priority relative to other pages (only one page here) -->
+  </url>
+</urlset>
