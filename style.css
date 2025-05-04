@@ -189,13 +189,76 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .contact-info strong { color: var(--dark-text-color); }
 .contact-info a { font-weight: 600; color: var(--secondary-color); }
 .contact-buttons { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; }
+
 /* Footer */
-.footer { background: var(--primary-color); color: var(--light-gray-bg); text-align: center; padding: 2rem 0; margin-top: auto; }
-.footer p { margin: 8px 0; font-size: 0.9rem;}
-.footer a { color: var(--accent-color-cyan); }
-.footer a:hover { color: var(--white-color); }
+.footer {
+    background: var(--primary-color); /* Deep blue footer */
+    color: var(--light-gray-bg);
+    text-align: center;
+    padding: 1.5rem 1rem; /* Adjusted padding */
+    margin-top: auto;
+    font-size: 0.9rem;
+}
 
+.footer .container {
+    max-width: 900px; /* Constrain width for better readability */
+}
 
+.footer p { /* Base style for footer paragraphs */
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.copyright {
+    margin-bottom: 15px; /* Space below copyright */
+    font-weight: 600;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Faint divider line */
+    margin: 15px auto; /* Space around divider */
+    width: 80%;
+    max-width: 500px;
+}
+
+.ai-disclaimer {
+    font-size: 0.7rem; /* Slightly smaller */
+    opacity: 0.9; /* Slightly less prominent */
+    margin-top: 15px; /* Space above disclaimer */
+}
+
+.ai-disclaimer p {
+    margin-bottom: 10px; /* Space between disclaimer paragraphs */
+}
+.ai-disclaimer p:last-child {
+    margin-bottom: 0;
+}
+
+.ai-disclaimer strong {
+     color: var(--white-color); /* Make headings slightly bolder/whiter */
+}
+
+.footer a {
+    color: var(--accent-color-cyan); /* Keep link color */
+    text-decoration: underline; /* Explicitly underline links here */
+}
+.footer a:hover {
+    color: var(--white-color);
+    text-decoration: underline;
+    opacity: 1;
+}
+
+/* --- Responsive Footer --- */
+@media (max-width: 768px) {
+    .footer { padding: 1rem; }
+    .ai-disclaimer { font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+    .footer p { font-size: 0.85rem; }
+    .ai-disclaimer { font-size: 0.75rem; }
+}
 /* ======================================== */
 /* === START: CHAT WIDGET CSS           === */
 /* ======================================== */
