@@ -386,7 +386,7 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 @media (max-width: 768px) {
     html { scroll-padding-top: var(--top bar-height); }
     body { padding-top: var(--top-bar-height); }
-    #top-bar { display: none; }
+    #top-bar { display: block; }
     .header { top: 0;}
 
     /* Hide text in top bar on smaller screens */
