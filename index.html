@@ -18,9 +18,8 @@
     <meta property="og:site_name" content="Sai Finance">
 
     <!-- Favicon -->
-    <link rel="icon" href="image/money_bag.svg" type="image/svg+xml"> <!-- **** ADDED THIS LINE **** -->
+    <link rel="icon" href="image/money_bag.svg" type="image/svg+xml">
 
-    
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
     {
@@ -79,8 +78,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Google Material Symbols -->
-    <
     <!-- Combined CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -91,13 +88,13 @@
             <div class="top-bar-translate">
                 <a href="https://saifinance-github-io.translate.goog/web/?_x_tr_sl=auto&_x_tr_tl=ta&_x_tr_hl=en&_x_tr_pto=wapp" id="translate-link-ta" class="translate-link" aria-label="Translate page to Tamil">
                     <i class="fas fa-language"></i>
-                    <span>தமிழ்</span>
+                    <span class="top-bar-text">தமிழ்</span>
                 </a>
             </div>
             <div class="top-bar-whatsapp">
                 <a href="https://wa.me/917868025380" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
                     <i class="fab fa-whatsapp whatsapp-icon"></i>
-                    <span class="whatsapp-number">WhatsApp +91 7868025380</span>
+                    <span class="top-bar-text whatsapp-number">WhatsApp +91 7868025380</span>
                 </a>
             </div>
         </div>
@@ -130,9 +127,9 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Section 1: Hero -->
-        <section id="home" class="hero section-padding">
-             <div class="container hero-content">
-                <h1>Need Quick Cash? Welcome to Sai Finance</h1>
+        <section id="home" class="hero section-padding" role="region" aria-labelledby="hero-title">
+             <div class="container hero-content fade-in-element">
+                <h1 id="hero-title">Need Quick Cash? Welcome to Sai Finance</h1>
                 <p class="subtitle">Your Trusted Loan Assistance Partner</p>
                 <div class="hero-buttons">
                     <a href="https://forms.gle/k3wGTY7GDgJk6ipn9" class="btn hero-apply-btn" target="_blank" rel="noopener noreferrer" aria-label="Apply Online for a Loan (opens in new tab)">Apply for Loan Now</a>
@@ -142,12 +139,12 @@
         </section>
 
         <!-- Section 2: About Us -->
-        <section id="about" class="section-padding about">
+        <section id="about" class="section-padding about fade-in-element" role="region" aria-labelledby="about-title">
              <div class="container">
-                <h2 class="section-title">About Sai Finance</h2>
+                <h2 class="section-title" id="about-title">About Sai Finance</h2>
                 <p>Sai Finance is a trusted financial mediator connecting borrowers with leading banks and financial institutions in Tirunelveli, Tenkasi, Thoothukudi. We provide personalized guidance and seamless support throughout the loan process, ensuring transparency and efficiency.</p>
                 <p>We are dedicated to finding the best loan solutions tailored to your needs, simplifying your path to financial assistance.</p>
-                <div id="our-impact" class="our-impact card">
+                <div id="our-impact" class="our-impact card fade-in-element">
                     <h3>Our Strong Presence & Impact</h3>
                     <div class="impact-stats">
                         <div class="stat-item"> <i class="fas fa-file-contract stat-icon"></i> <span class="stat-number">600+</span> <span class="stat-label">Loans Successfully Processed</span> </div>
@@ -158,9 +155,9 @@
         </section>
 
         <!-- Section 3: Free Credit Report -->
-        <section id="credit-report" class="section-padding credit-report-section">
+        <section id="credit-report" class="section-padding credit-report-section fade-in-element" role="region" aria-labelledby="credit-report-title">
             <div class="container">
-                <h2 class="section-title">Check Your <span class="highlight-gradient">FREE</span> Credit Report</h2>
+                <h2 class="section-title" id="credit-report-title">Check Your <span class="highlight-gradient">FREE</span> Credit Report</h2>
                 <p class="section-subtitle">Understanding your credit score is the first step towards securing the best loan options. Get your official report from CIBIL or Experian today!</p>
                 <div class="credit-report-links">
                      <a href="https://myscore.cibil.com/CreditView/enrollShort_new.page?enterprise=CIBIL&offer=FACRA&atvy=%7B%22264396%22%3A%22Experience+B%22%7D" class="btn credit-report-btn cibil-btn" target="_blank" rel="noopener noreferrer" aria-label="Get Free CIBIL Report (opens Transunion CIBIL website)">
@@ -170,7 +167,7 @@
                          <i class="fas fa-chart-line"></i> Get FREE Experian Report
                      </a>
                 </div>
-                <div class="credit-report-details card">
+                <div class="credit-report-details card fade-in-element">
                     <h3>What's Included in Your Credit Report?</h3>
                     <div class="report-details-columns">
                         <div class="report-column">
@@ -187,29 +184,29 @@
         </section>
 
         <!-- Section 4: Services -->
-        <section id="loan-services" class="section-padding services">
+        <section id="loan-services" class="section-padding services fade-in-element" role="region" aria-labelledby="loan-services-title">
             <div class="container">
-                <h2 class="section-title">Loan Assistance Services</h2>
+                <h2 class="section-title" id="loan-services-title">Loan Assistance Services</h2>
                 <div class="service-list">
-                    <article class="service-item card"> <h3>Personal Loans</h3> <p>Quick funds for personal needs. Min. Salary ₹15k (Bank Credit), CIBIL 700+ preferred. Cash salary not accepted. Min Loan ₹50k.</p> <a href="#eligibility-docs" class="btn link-btn">Check Eligibility</a> </article>
-                    <article class="service-item card"> <h3>Home Loans (HL)</h3> <p>Expert assistance for purchasing or refinancing your home. Indicative interest rates range from 9% to 15%.</p> <a href="#rates-banks" class="btn link-btn">View Rates</a> </article>
-                    <article class="service-item card"> <h3>Loan Against Property (LAP)</h3> <p>Leverage your property's value for funds. Indicative interest rates from 11.5% to 21%.</p> <a href="#rates-banks" class="btn link-btn">View Rates</a> </article>
-                    <article class="service-item card"> <h3>Business Loans</h3> <p>Tailored options for SMEs (2+ years operation). Includes working capital, term loans, and more.</p> <a href="#contact" class="btn link-btn">Inquire for Business</a> </article>
-                    <article class="service-item card"> <h3>Other Solutions</h3> <p>We also assist with Invoice Financing and Lines of Credit based on specific requirements.</p> <a href="#contact" class="btn link-btn">Discuss Options</a> </article>
+                    <article class="service-item card fade-in-element"> <h3>Personal Loans</h3> <p>Quick funds for personal needs. Min. Salary ₹15k (Bank Credit), CIBIL 700+ preferred. Cash salary not accepted. Min Loan ₹50k.</p> <a href="#eligibility-docs" class="btn link-btn">Check Eligibility</a> </article>
+                    <article class="service-item card fade-in-element"> <h3>Home Loans (HL)</h3> <p>Expert assistance for purchasing or refinancing your home. Indicative interest rates range from 9% to 15%.</p> <a href="#rates-banks" class="btn link-btn">View Rates</a> </article>
+                    <article class="service-item card fade-in-element"> <h3>Loan Against Property (LAP)</h3> <p>Leverage your property's value for funds. Indicative interest rates from 11.5% to 21%.</p> <a href="#rates-banks" class="btn link-btn">View Rates</a> </article>
+                    <article class="service-item card fade-in-element"> <h3>Business Loans</h3> <p>Tailored options for SMEs (2+ years operation). Includes working capital, term loans, and more.</p> <a href="#contact" class="btn link-btn">Inquire for Business</a> </article>
+                    <article class="service-item card fade-in-element"> <h3>Other Solutions</h3> <p>We also assist with Invoice Financing and Lines of Credit based on specific requirements.</p> <a href="#contact" class="btn link-btn">Discuss Options</a> </article>
                 </div>
             </div>
         </section>
 
         <!-- Section 5: Interest Rates & Partner Banks -->
-        <section id="rates-banks" class="section-padding interest">
+        <section id="rates-banks" class="section-padding interest fade-in-element" role="region" aria-labelledby="rates-banks-title">
              <div class="container">
-                <h2 class="section-title">Indicative Rates, Partners & DSA Codes</h2>
+                <h2 class="section-title" id="rates-banks-title">Indicative Rates, Partners & DSA Codes</h2>
                 <p class="section-subtitle">Rates vary. We partner with leading institutions & operate with authorized codes.</p>
                 <div class="interest-content">
-                    <div class="rates card"> <h3>Interest Rate Range (p.a.)</h3> <ul> <li><strong>Home Loans (HL):</strong> 9% - 15%</li> <li><strong>Loan Against Property (LAP):</strong> 11.5% - 21%</li> <li><strong>Other Loans:</strong> Varies (e.g., 12.5% - 21%+)</li> </ul> </div>
-                    <div class="banks card"> <h3>Partner Institutions</h3> <ul> <li>Bandhan Bank</li> <li>PNB</li> <li>Grihum Housing Finance</li> <li>Chola</li> <li>Veritas Finance</li> <li>Indostar Capital Finance</li> <li>Aptus Value Housing Finance</li> <li>IKF Finance (LAP)</li> <li>APAC Financial Services</li> <li>Five Star Business Finance</li> <li>Poonawalla</li> </ul> </div>
+                    <div class="rates card fade-in-element"> <h3>Interest Rate Range (p.a.)</h3> <ul> <li><strong>Home Loans (HL):</strong> 9% - 15%</li> <li><strong>Loan Against Property (LAP):</strong> 11.5% - 21%</li> <li><strong>Other Loans:</strong> Varies (e.g., 12.5% - 21%+)</li> </ul> </div>
+                    <div class="banks card fade-in-element"> <h3>Partner Institutions</h3> <ul> <li>Bandhan Bank</li> <li>PNB</li> <li>Grihum Housing Finance</li> <li>Chola</li> <li>Veritas Finance</li> <li>Indostar Capital Finance</li> <li>Aptus Value Housing Finance</li> <li>IKF Finance (LAP)</li> <li>APAC Financial Services</li> <li>Five Star Business Finance</li> <li>Poonawalla</li> </ul> </div>
                 </div>
-                <div id="dsa-codes" class="dsa-codes card">
+                <div id="dsa-codes" class="dsa-codes card fade-in-element">
                     <h3>Our DSA Codes</h3>
                     <p>We are authorized partners with various banks. Our Direct Selling Agent (DSA) codes include:</p>
                     <ul> <li>Veritas: VFASD221760</li> <li>Ponnawalla: 006101</li> <li>IKF Finance: 11154</li> <li>Indo Star: CP037394</li> <li>SMFG: HLPDTIR024</li> <li>Chola: 10006624</li> </ul>
@@ -219,23 +216,23 @@
         </section>
 
         <!-- Section 6: Eligibility & Documents -->
-        <section id="eligibility-docs" class="section-padding eligibility">
+        <section id="eligibility-docs" class="section-padding eligibility fade-in-element" role="region" aria-labelledby="eligibility-docs-title">
              <div class="container">
-                <h2 class="section-title">Eligibility & Documents Overview</h2>
+                <h2 class="section-title" id="eligibility-docs-title">Eligibility & Documents Overview</h2>
                 <div class="eligibility-content">
-                    <div class="card"> <h3>Common Eligibility Criteria</h3> <ul> <li>Indian citizen</li> <li>Age Criteria (Varies, e.g., 21-65)</li> <li>Stable Income Source</li> <li>Min. Salary (Personal Loan): ₹15,000 (Bank Credit Only)</li> <li>CIBIL Score: 700+ preferred</li> <li>Business Vintage: 2+ years (for business loans)</li> <li>Turnover: Varies by lender</li> </ul> </div>
-                    <div class="card"> <h3>General Documents Required</h3> <ul> <li>PAN Card (Mandatory Copy)</li> <li>Aadhaar Card (ID/Address Proof)</li> <li>Other Address Proof (Utility Bill, Passport)</li> <li>Passport Size Photo(s)</li> <li>Bank Statements (Last 6-12 Months)</li> <li><strong>Salaried:</strong> 3 Months Salary Slips, Form 16/ITR</li> <li><strong>Self-Employed:</strong> ITR (2-3 yrs), Business Proof, Financials</li> </ul> </div>
+                    <div class="card fade-in-element"> <h3>Common Eligibility Criteria</h3> <ul> <li>Indian citizen</li> <li>Age Criteria (Varies, e.g., 21-65)</li> <li>Stable Income Source</li> <li>Min. Salary (Personal Loan): ₹15,000 (Bank Credit Only)</li> <li>CIBIL Score: 700+ preferred</li> <li>Business Vintage: 2+ years (for business loans)</li> <li>Turnover: Varies by lender</li> </ul> </div>
+                    <div class="card fade-in-element"> <h3>General Documents Required</h3> <ul> <li>PAN Card (Mandatory Copy)</li> <li>Aadhaar Card (ID/Address Proof)</li> <li>Other Address Proof (Utility Bill, Passport)</li> <li>Passport Size Photo(s)</li> <li>Bank Statements (Last 6-12 Months)</li> <li><strong>Salaried:</strong> 3 Months Salary Slips, Form 16/ITR</li> <li><strong>Self-Employed:</strong> ITR (2-3 yrs), Business Proof, Financials</li> </ul> </div>
                 </div>
                 <p class="disclaimer">*Specific requirements depend on the lender and loan type. Contact us for details.</p>
             </div>
         </section>
 
         <!-- Section 7: Interest Calculator Demo -->
-        <section id="calculator" class="section-padding calculator-section">
+        <section id="calculator" class="section-padding calculator-section fade-in-element" role="region" aria-labelledby="calculator-title">
              <div class="container">
-                <h2 class="section-title">Loan Interest Calculator</h2>
+                <h2 class="section-title" id="calculator-title">Loan Interest Calculator</h2>
                 <p class="section-subtitle">Estimate interest using Simple or Compound (Annual) methods.</p>
-                <form id="calculator-form" class="calculator-form card">
+                <form id="calculator-form" class="calculator-form card fade-in-element">
                     <div class="form-group interest-type-selector"> <fieldset> <legend class="sr-only">Select Interest Type</legend> <label for="simple_interest"> <input type="radio" id="simple_interest" name="interest_type" value="simple" checked> Simple </label> <label for="compound_interest"> <input type="radio" id="compound_interest" name="interest_type" value="compound"> Compound (Annually) </label> </fieldset> </div>
                     <div class="form-group"> <label for="principal">Principal Amount (₹):</label> <input type="number" id="principal" name="principal" required placeholder="e.g., 50000"> </div>
                     <div class="form-group"> <label for="rate">Annual Interest Rate (%):</label> <input type="number" id="rate" name="rate" step="0.1" required placeholder="e.g., 12.5"> </div>
@@ -249,38 +246,38 @@
         </section>
 
         <!-- Section 8: Resources/Download -->
-        <section id="resources" class="section-padding resources">
-            <div class="container"> <h2 class="section-title">Learn More / Resources</h2> <p>View our informational guide for more details.</p> <a href="https://drive.google.com/file/d/1XfoOWSrEkKQrugEWW4BptKlA39JEpQw-/view?usp=sharing" class="btn resources-download-btn" target="_blank" rel="noopener noreferrer" aria-label="View Information Guide on Google Drive (opens in new tab)"> View Info Guide <span class="sr-only">(opens in new tab)</span> </a> </div>
+        <section id="resources" class="section-padding resources fade-in-element" role="region" aria-labelledby="resources-title">
+            <div class="container"> <h2 class="section-title" id="resources-title">Learn More / Resources</h2> <p>View our informational guide for more details.</p> <a href="https://drive.google.com/file/d/1XfoOWSrEkKQrugEWW4BptKlA39JEpQw-/view?usp=sharing" class="btn resources-download-btn" target="_blank" rel="noopener noreferrer" aria-label="View Information Guide on Google Drive (opens in new tab)"> View Info Guide <span class="sr-only">(opens in new tab)</span> </a> </div>
         </section>
 
         <!-- Section 9: Quick Links -->
-        <section id="quick-links" class="section-padding quick-links">
-             <div class="container"> <h2 class="section-title">Important & Partner Links</h2> <nav aria-label="Partner and Regulatory Links"> <ul> <li><a href="https://www.rbi.org.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Reserve Bank of India website (opens in new tab)">RBI</a></li> <li><a href="https://www.pnbindia.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit PNB website (opens in new tab)">PNB</a></li> <li><a href="https://www.bandhanbank.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Bandhan Bank website (opens in new tab)">Bandhan Bank</a></li> <li><a href="https://cholamandalam.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Chola website (opens in new tab)">Chola</a></li> <li><a href="https://veritasfin.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Veritas Finance website (opens in new tab)">Veritas</a></li> <li><a href="https://www.indostarcapital.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Indostar website (opens in new tab)">Indostar</a></li> <li><a href="https://aptusindia.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Aptus website (opens in new tab)">Aptus</a></li> </ul> </nav> </div>
+        <section id="quick-links" class="section-padding quick-links fade-in-element" role="region" aria-labelledby="quick-links-title">
+             <div class="container"> <h2 class="section-title" id="quick-links-title">Important & Partner Links</h2> <nav aria-label="Partner and Regulatory Links"> <ul> <li><a href="https://www.rbi.org.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Reserve Bank of India website (opens in new tab)">RBI</a></li> <li><a href="https://www.pnbindia.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit PNB website (opens in new tab)">PNB</a></li> <li><a href="https://www.bandhanbank.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Bandhan Bank website (opens in new tab)">Bandhan Bank</a></li> <li><a href="https://cholamandalam.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Chola website (opens in new tab)">Chola</a></li> <li><a href="https://veritasfin.in/" target="_blank" rel="noopener noreferrer" aria-label="Visit Veritas Finance website (opens in new tab)">Veritas</a></li> <li><a href="https://www.indostarcapital.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Indostar website (opens in new tab)">Indostar</a></li> <li><a href="https://aptusindia.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Aptus website (opens in new tab)">Aptus</a></li> </ul> </nav> </div>
         </section>
 
         <!-- Section 10: FAQ -->
-        <section id="faq" class="section-padding faq">
+        <section id="faq" class="section-padding faq fade-in-element" role="region" aria-labelledby="faq-title">
             <div class="container">
-                <h2 class="section-title">Frequently Asked Questions</h2>
+                <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
                  <div class="faq-list">
-                    <details class="faq-item"> <summary>What service does Sai Finance provide?</summary> <p>Sai Finance acts as a financial mediator, connecting borrowers seeking personal, home, business, or property loans with suitable banks and financial institutions in Venkateswarapuram. We provide guidance and support throughout the application process.</p> </details>
-                    <details class="faq-item"> <summary>What is the minimum salary for a Personal Loan?</summary> <p>A minimum salary of ₹15,000 per month (credited to a bank account) is generally required. Cash salaries are not accepted.</p> </details>
-                    <details class="faq-item"> <summary>What CIBIL score is needed?</summary> <p>A CIBIL score of 700 or higher is generally preferred or required by most lenders we partner with. You can check your official score for free here: <a href="https://myscore.cibil.com/CreditView/enrollShort_new.page?enterprise=CIBIL&offer=FACRA&atvy=%7B%22264396%22%3A%22Experience+B%22%7D" target="_blank" rel="noopener noreferrer" aria-label="Check Free CIBIL Score (opens Transunion CIBIL website)">Check Free CIBIL Score</a>.</p> </details>
-                    <details class="faq-item"> <summary>How do I apply for a loan through Sai Finance?</summary> <p>You can start by clicking the "Apply Online" button which links to our application form: <a href="https://forms.gle/k3wGTY7GDgJk6ipn9" target="_blank" rel="noopener noreferrer" aria-label="Go to Online Application form (opens in new tab)">Online Application Form</a>. Alternatively, use the "Quick Contact" form or call us directly.</p> </details>
-                    <details class="faq-item"> <summary>What documents are typically required?</summary> <p>Basic documents usually include PAN Card, Aadhaar Card (or other ID/Address proof), Bank Statements (6-12 months), Photos, and income proof like Salary Slips (for salaried) or ITR/Financials (for self-employed). See the <a href="#eligibility-docs">Eligibility & Documents</a> section for a general overview, or check this detailed list: <a href="https://drive.google.com/file/d/1sxuMdLVOGKYIaIouOzfnK0owhlPEL45H/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Detailed Document Checklist (opens Google Drive)">Detailed Document Checklist</a>.</p> </details>
-                    <details class="faq-item"> <summary>Are there any fees charged by Sai Finance?</summary> <p>Yes, as a mediator providing facilitation services, Sai Finance charges a commission (Mediator Fee). This is separate from any processing fees or other charges levied by the actual lending institution. All fees are disclosed upfront for transparency.</p> </details>
-                    <details class="faq-item"> <summary>What are the typical customer charges or expenses involved in getting a loan?</summary> <p>Besides the lender's interest rate, customers may incur several charges depending on the loan type and lender. These can include Login/Application Fees, Processing Fees (typically 1%-2.5% + GST), Legal/Notary Fees, Property-related charges like EC/MOD (for HL/LAP), and potentially Insurance costs. Sai Finance also charges a separate Mediator Fee for our services. For a detailed illustrative breakdown of potential expenses, please refer to this document: <a href="https://drive.google.com/file/d/1EBbi4lAy_MYDjOmBRUTUorFaDZFNRoeF/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Detailed Customer Expenses Document (opens Google Drive)">Detailed Customer Expenses Overview</a>.</p> </details>
-                    <details class="faq-item"> <summary>How do I contact Sai Finance?</summary> <p>You can reach us via phone at <a href="tel:+917868025380">+91 78 68 02 53 80</a> or email us at <a href="mailto:saifinance622@gmail.com">saifinance622@gmail.com</a>. Our address and contact form links are in the <a href="#contact">Contact Section</a> below.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>What service does Sai Finance provide?</summary> <p>Sai Finance acts as a financial mediator, connecting borrowers seeking personal, home, business, or property loans with suitable banks and financial institutions in Venkateswarapuram. We provide guidance and support throughout the application process.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>What is the minimum salary for a Personal Loan?</summary> <p>A minimum salary of ₹15,000 per month (credited to a bank account) is generally required. Cash salaries are not accepted.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>What CIBIL score is needed?</summary> <p>A CIBIL score of 700 or higher is generally preferred or required by most lenders we partner with. You can check your official score for free here: <a href="https://myscore.cibil.com/CreditView/enrollShort_new.page?enterprise=CIBIL&offer=FACRA&atvy=%7B%22264396%22%3A%22Experience+B%22%7D" target="_blank" rel="noopener noreferrer" aria-label="Check Free CIBIL Score (opens Transunion CIBIL website)">Check Free CIBIL Score</a>.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>How do I apply for a loan through Sai Finance?</summary> <p>You can start by clicking the "Apply Online" button which links to our application form: <a href="https://forms.gle/k3wGTY7GDgJk6ipn9" target="_blank" rel="noopener noreferrer" aria-label="Go to Online Application form (opens in new tab)">Online Application Form</a>. Alternatively, use the "Quick Contact" form or call us directly.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>What documents are typically required?</summary> <p>Basic documents usually include PAN Card, Aadhaar Card (or other ID/Address proof), Bank Statements (6-12 months), Photos, and income proof like Salary Slips (for salaried) or ITR/Financials (for self-employed). See the <a href="#eligibility-docs">Eligibility & Documents</a> section for a general overview, or check this detailed list: <a href="https://drive.google.com/file/d/1sxuMdLVOGKYIaIouOzfnK0owhlPEL45H/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Detailed Document Checklist (opens Google Drive)">Detailed Document Checklist</a>.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>Are there any fees charged by Sai Finance?</summary> <p>Yes, as a mediator providing facilitation services, Sai Finance charges a commission (Mediator Fee). This is separate from any processing fees or other charges levied by the actual lending institution. All fees are disclosed upfront for transparency.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>What are the typical customer charges or expenses involved in getting a loan?</summary> <p>Besides the lender's interest rate, customers may incur several charges depending on the loan type and lender. These can include Login/Application Fees, Processing Fees (typically 1%-2.5% + GST), Legal/Notary Fees, Property-related charges like EC/MOD (for HL/LAP), and potentially Insurance costs. Sai Finance also charges a separate Mediator Fee for our services. For a detailed illustrative breakdown of potential expenses, please refer to this document: <a href="https://drive.google.com/file/d/1EBbi4lAy_MYDjOmBRUTUorFaDZFNRoeF/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Detailed Customer Expenses Document (opens Google Drive)">Detailed Customer Expenses Overview</a>.</p> </details>
+                    <details class="faq-item fade-in-element"> <summary>How do I contact Sai Finance?</summary> <p>You can reach us via phone at <a href="tel:+917868025380">+91 78 68 02 53 80</a> or email us at <a href="mailto:saifinance622@gmail.com">saifinance622@gmail.com</a>. Our address and contact form links are in the <a href="#contact">Contact Section</a> below.</p> </details>
                  </div>
             </div>
         </section>
 
         <!-- Section 11: Contact / Apply Section -->
-        <section id="contact" class="section-padding contact">
+        <section id="contact" class="section-padding contact fade-in-element" role="region" aria-labelledby="contact-title">
              <div class="container">
-                <h2 class="section-title">Contact & Apply</h2>
+                <h2 class="section-title" id="contact-title">Contact & Apply</h2>
                 <p class="section-subtitle">Ready to take the next step or have questions? Use the buttons below or contact us directly.</p>
-                <div class="contact-info card"> <p><strong>Contact Person:</strong> Arumugam <a href="https://drive.google.com/file/d/1QK_F994jvpQ-K5QS3qaBtkoYk3LEYwPk/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Arumugam Profile Document (opens Google Drive)" title="View Profile" style="margin-left: 10px; text-decoration: none; vertical-align: middle;">
+                <div class="contact-info card fade-in-element"> <p><strong>Contact Person:</strong> Arumugam <a href="https://drive.google.com/file/d/1QK_F994jvpQ-K5QS3qaBtkoYk3LEYwPk/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="View Arumugam Profile Document (opens Google Drive)" title="View Profile" style="margin-left: 10px; text-decoration: none; vertical-align: middle;">
                     <i class="fas fa-external-link-alt" style="font-size: 0.8em;"></i> <!-- Optional: Link Icon -->
                 </a></p> <p><strong>Address:</strong> No: 12 Jeyaraj Complex, Venkateswarapuram-627854</p> <p><strong>Phone:</strong> <a href="tel:+917868025380">+91 78 68 02 53 80</a></p> <p><strong>Email:</strong> <a href="mailto:saifinance622@gmail.com">saifinance622@gmail.com</a></p> </div>
                 <div class="contact-buttons">
@@ -292,41 +289,41 @@
     </main>
 
     <!-- Footer -->
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <p class="copyright">© <span id="year"></span> mahaAI. All rights reserved.</p>
-                <hr class="footer-divider">
-                <div class="ai-disclaimer">
-                    <p><strong>AI Assistant Disclaimer:</strong> Responses from the <strong>Subha AI</strong> chat assistant are generated by artificial intelligence powered by <a href="https://deepmind.google/technologies/gemini/" target="_blank" rel="noopener noreferrer" aria-label="Learn more about Google Gemini models (opens Google DeepMind website)">Google DeepMind Gemini models</a>. While we strive for accuracy, information may be incomplete or contain errors. Use for informational purposes only.</p>
-                    <p><strong>This is not financial, legal, or professional advice.</strong> Always consult with a qualified professional at Sai Finance or independently before making financial decisions. Verify critical information.</p>
-                </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">© <span id="year"></span> mahaAI. All rights reserved.</p>
+            <hr class="footer-divider">
+            <div class="ai-disclaimer">
+                <p><strong>AI Assistant Disclaimer:</strong> Responses from the <strong>Subha AI</strong> chat assistant are generated by artificial intelligence powered by <a href="https://deepmind.google/technologies/gemini/" target="_blank" rel="noopener noreferrer" aria-label="Learn more about Google Gemini models (opens Google DeepMind website)">Google DeepMind Gemini models</a>. While we strive for accuracy, information may be incomplete or contain errors. Use for informational purposes only.</p>
+                <p><strong>This is not financial, legal, or professional advice.</strong> Always consult with a qualified professional at Sai Finance or independently before making financial decisions. Verify critical information.</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-     <!-- **** Chat Widget HTML Structure **** -->
+     <!-- Chat Widget HTML Structure -->
      <div id="chat-widget" class="chat-widget">
-        <button id="chat-toggle" class="chat-toggle" title="Toggle Chat">Ask Subha AI <i class="fas fa-magic-wand-sparkles"></i></button>
-        <div id="chat-container" class="chat-container hidden">
+        <button id="chat-toggle" class="chat-toggle" title="Toggle Chat" aria-haspopup="dialog" aria-expanded="false" aria-controls="chat-container">Ask Subha AI <i class="fas fa-magic-wand-sparkles"></i></button>
+        <div id="chat-container" class="chat-container hidden" role="dialog" aria-modal="true" aria-labelledby="chat-header-title">
             <div id="chat-header">
+                <span id="chat-header-title" class="sr-only">Subha AI Chat Assistant</span>
                 <div class="lang-selector">
                     <button id="lang-en" class="lang-button active" data-lang="en" title="English">EN</button>
                     <button id="lang-ta" class="lang-button" data-lang="ta" title="Tamil">தமிழ்</button>
                 </div>
                 <div class="header-buttons">
-                    <button id="new-chat" title="Start New Chat"><i class="fas fa-sync-alt"></i></button>
-                    <button id="close-chat" title="Close Chat"><i class="fas fa-times"></i></button>
+                    <button id="new-chat" title="Start New Chat" aria-label="Start New Chat"><i class="fas fa-sync-alt"></i></button>
+                    <button id="close-chat" title="Close Chat" aria-label="Close Chat"><i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div id="chat-messages"></div>
-            <div id="chat-error" class="chat-error-display hidden"></div>
+            <div id="chat-messages" aria-live="polite"></div>
+            <div id="chat-error" class="chat-error-display hidden" role="alert"></div>
             <div id="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Ask a question..." autocomplete="off">
-                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+                <input type="text" id="chat-input" placeholder="Ask a question..." autocomplete="off" aria-label="Type your message for Subha AI">
+                <button id="send-message" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
-    <!-- **** End Chat Widget HTML **** -->
+    <!-- End Chat Widget HTML -->
 
 
     <!-- JavaScript -->

@@ -1,6 +1,31 @@
-// script.js - FINAL - Includes Translate Link Logic, Correct Scrollspy Offset
+// script.js - Enhanced Version
 
 document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('header');
+    const topBar = document.getElementById('top-bar');
+    let currentScrollOffset = 0; // Will be calculated
+
+    // --- Calculate and Set Dynamic Offsets ---
+    const getEffectiveHeaderHeight = () => {
+        const topBarVisible = topBar && window.getComputedStyle(topBar).display !== 'none';
+        const topBarHeight = topBarVisible ? topBar.offsetHeight : 0;
+        const mainHeaderHeight = header ? header.offsetHeight : 0;
+        return mainHeaderHeight + topBarHeight;
+    };
+
+    const updateScrollRelatedPaddings = () => {
+        currentScrollOffset = getEffectiveHeaderHeight();
+        document.documentElement.style.scrollPaddingTop = `${currentScrollOffset}px`;
+        // body padding-top is set via CSS using vars for initial load,
+        // but if header height changes drastically and dynamically, this could also be adjusted.
+        // For now, CSS fixed padding-top on body is: calc(var(--top-bar-height) + var(--header-height))
+        // which refers to the *defined* header height, not its dynamic offsetHeight if it wraps.
+        // The scroll-padding-top for anchors is now dynamic.
+    };
+
+    // Initial calculation
+    updateScrollRelatedPaddings();
+
 
     // --- Mobile Menu Toggle ---
     const menuToggle = document.getElementById('mobile-menu-toggle');
@@ -11,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.toggle('active');
             const isExpanded = navbar.classList.contains('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.innerHTML = isExpanded ? '✕' : '☰'; // Change icon
+            menuToggle.innerHTML = isExpanded ? '✕' : '☰';
         });
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('.navbar a.nav-link').forEach(link => { // More specific selector
+        document.querySelectorAll('.navbar a.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (navbar.classList.contains('active')) {
                     navbar.classList.remove('active');
@@ -25,24 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Active Nav Link Highlighting on Scroll ---
-    const navLinks = document.querySelectorAll('.navbar a.nav-link[href^="#"]'); // More specific selector
+    // --- Active Nav Link Highlighting on Scroll (Scrollspy) ---
+    const navLinks = document.querySelectorAll('.navbar a.nav-link[href^="#"]');
     const sections = document.querySelectorAll('main section[id]');
-    const header = document.getElementById('header');
-    const topBar = document.getElementById('top-bar');
-
-    const getEffectiveHeaderHeight = () => {
-        // Check visibility using computed style as display:none removes offsetHeight
-        const topBarVisible = topBar && window.getComputedStyle(topBar).display !== 'none';
-        // Ensure elements exist before getting offsetHeight
-        const topBarHeight = topBarVisible ? topBar.offsetHeight : 0;
-        const mainHeaderHeight = header ? header.offsetHeight : 0;
-        // If header height becomes auto on mobile wrap, get scrollHeight (might be less accurate)
-        // const currentMainHeaderHeight = (header && window.getComputedStyle(header).height === 'auto') ? header.scrollHeight : mainHeaderHeight;
-        return mainHeaderHeight + topBarHeight;
-    };
-
-    let currentScrollOffset = getEffectiveHeaderHeight(); // Initial calculation
 
     const removeActiveClasses = () => {
         navLinks.forEach(link => {
@@ -51,86 +60,105 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Define observer options dynamically based on initial offset
-    let observerOptions = {
-        root: null,
-        rootMargin: `-${currentScrollOffset + 20}px 0px -45% 0px`, // Increased top margin
-        threshold: 0
-    };
+    let scrollspyObserver;
 
-    const observerCallback = (entries) => {
-        let latestIntersectingEntry = null;
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Find the section that is most visible near the top edge accounting for header
-                if (!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top) {
-                    latestIntersectingEntry = entry;
+    const initScrollspyObserver = () => {
+        if (scrollspyObserver) scrollspyObserver.disconnect();
+
+        // Use the dynamically calculated currentScrollOffset for rootMargin
+        const observerOptions = {
+            root: null,
+            rootMargin: `-${currentScrollOffset + 20}px 0px -45% 0px`,
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            let latestIntersectingEntry = null;
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!latestIntersectingEntry || entry.boundingClientRect.top < latestIntersectingEntry.boundingClientRect.top) {
+                        latestIntersectingEntry = entry;
+                    }
+                }
+            });
+
+            if (latestIntersectingEntry) {
+                const id = latestIntersectingEntry.target.getAttribute('id');
+                const activeLink = document.querySelector(`.navbar a.nav-link[href="#${id}"]`);
+                if (activeLink) {
+                    removeActiveClasses();
+                    activeLink.classList.add('active');
+                    activeLink.setAttribute('aria-current', 'page');
+                }
+            } else {
+                const scrollY = window.scrollY;
+                const dynamicOffsetForFallback = getEffectiveHeaderHeight(); // Recalculate for fallback accuracy
+                const isNearBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 100;
+                const isNearTop = scrollY < (window.innerHeight * 0.3) - dynamicOffsetForFallback;
+
+                if (isNearBottom && navLinks.length > 0) {
+                    removeActiveClasses();
+                    const lastLink = navLinks[navLinks.length - 1];
+                    if(lastLink) { lastLink.classList.add('active'); lastLink.setAttribute('aria-current', 'page'); }
+                } else if (isNearTop && navLinks.length > 0) {
+                    removeActiveClasses();
+                    const firstLink = navLinks[0];
+                    if(firstLink) { firstLink.classList.add('active'); firstLink.setAttribute('aria-current', 'page'); }
+                } else {
+                    removeActiveClasses();
                 }
             }
-        });
-
-        // Fallback logic needs dynamic offset
-        const dynamicOffset = getEffectiveHeaderHeight();
-
-        if (latestIntersectingEntry) {
-            const id = latestIntersectingEntry.target.getAttribute('id');
-            const activeLink = document.querySelector(`.navbar a.nav-link[href="#${id}"]`);
-            if (activeLink) {
-                removeActiveClasses();
-                activeLink.classList.add('active');
-                activeLink.setAttribute('aria-current', 'page');
-            }
-        } else {
-             // Fallback when no section is intersecting according to rootMargin
-             const scrollY = window.scrollY;
-             const isNearBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 100;
-             const isNearTop = scrollY < (window.innerHeight * 0.3) - dynamicOffset; // Use dynamic offset
-
-              if (isNearBottom && navLinks.length > 0) {
-                 removeActiveClasses();
-                 const lastLink = navLinks[navLinks.length - 1];
-                 if(lastLink) { lastLink.classList.add('active'); lastLink.setAttribute('aria-current', 'page'); }
-              } else if (isNearTop && navLinks.length > 0) {
-                 removeActiveClasses();
-                  const firstLink = navLinks[0];
-                  if(firstLink) { firstLink.classList.add('active'); firstLink.setAttribute('aria-current', 'page'); }
-              } else {
-                  // If not near top or bottom, and nothing intersecting, remove active classes
-                  removeActiveClasses();
-              }
-        }
+        };
+        scrollspyObserver = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => { if (section) scrollspyObserver.observe(section); });
     };
 
-    let observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sections.forEach(section => { if (section) observer.observe(section); });
-
-    // Recalculate offset and potentially re-observe on resize
-     let resizeTimeout;
-     window.addEventListener('resize', () => {
-         clearTimeout(resizeTimeout);
-         resizeTimeout = setTimeout(() => {
-             const newOffset = getEffectiveHeaderHeight();
-             // Only re-init observer if offset significantly changes (more performant)
-             if (Math.abs(newOffset - currentScrollOffset) > 5) {
-                 console.log("Re-initializing observer due to resize. New Offset:", newOffset);
-                 currentScrollOffset = newOffset;
-                 observerOptions.rootMargin = `-${currentScrollOffset + 20}px 0px -45% 0px`;
-                 observer.disconnect(); // Disconnect old one
-                 observer = new IntersectionObserver(observerCallback, observerOptions); // Create new one
-                 sections.forEach(section => { if (section) observer.observe(section); }); // Re-observe
-             }
-         }, 250); // Debounce resize event
-     });
-
+    initScrollspyObserver(); // Initialize on load
 
     // --- Loan Interest Calculator ---
-    const calcButton = document.getElementById("calc-button");
-    if (calcButton) {
-        const principalInput = document.getElementById("principal"); const rateInput = document.getElementById("rate"); const timeInput = document.getElementById("time"); const resultDiv = document.getElementById("calc-result"); const errorP = document.getElementById("calculator-error");
-        calcButton.addEventListener("click", function(event) { event.preventDefault(); const interestTypeInput = document.querySelector('input[name="interest_type"]:checked'); resultDiv.innerHTML = ""; errorP.textContent = ""; const P = parseFloat(principalInput.value), r_percent = parseFloat(rateInput.value), t = parseFloat(timeInput.value); const interestType = interestTypeInput ? interestTypeInput.value : null; if (!interestType) { errorP.textContent = 'Please select an interest type.'; return; } if (isNaN(P) || isNaN(r_percent) || isNaN(t) || P <= 0 || r_percent < 0 || t <= 0) { errorP.textContent = "Please enter valid positive numbers (Principal > 0, Rate >= 0, Time > 0)."; return; } let interest = 0, totalAmount = 0, typeCalculated = ""; const r = r_percent / 100; if (interestType === 'simple') { interest = P * r * t; totalAmount = P + interest; typeCalculated = "Simple Interest"; } else if (interestType === 'compound') { totalAmount = P * Math.pow((1 + r), t); interest = totalAmount - P; typeCalculated = "Compound Interest (Annually)"; } resultDiv.innerHTML = `<p><strong>Interest Type:</strong> ${typeCalculated}</p><p><strong>Estimated Interest:</strong> ₹ ${interest.toFixed(2)}</p><p><strong>Estimated Total Repayment:</strong> ₹ ${totalAmount.toFixed(2)}</p>`; });
-    }
+    const calcForm = document.getElementById("calculator-form");
+    if (calcForm) {
+        const principalInput = document.getElementById("principal");
+        const rateInput = document.getElementById("rate");
+        const timeInput = document.getElementById("time");
+        const resultDiv = document.getElementById("calc-result");
+        const errorP = document.getElementById("calculator-error");
 
+        calcForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            resultDiv.innerHTML = ""; // Clear previous results
+            errorP.textContent = "";  // Clear previous errors
+
+            const interestTypeInput = document.querySelector('input[name="interest_type"]:checked');
+            const P = parseFloat(principalInput.value);
+            const r_percent = parseFloat(rateInput.value);
+            const t = parseFloat(timeInput.value);
+            const interestType = interestTypeInput ? interestTypeInput.value : null;
+
+            if (!interestType) {
+                errorP.textContent = 'Please select an interest type.';
+                return;
+            }
+            if (isNaN(P) || isNaN(r_percent) || isNaN(t) || P <= 0 || r_percent < 0 || t <= 0) {
+                errorP.textContent = "Please enter valid positive numbers (Principal > 0, Rate >= 0, Time > 0).";
+                return;
+            }
+
+            let interest = 0, totalAmount = 0, typeCalculated = "";
+            const r = r_percent / 100;
+
+            if (interestType === 'simple') {
+                interest = P * r * t;
+                totalAmount = P + interest;
+                typeCalculated = "Simple Interest";
+            } else if (interestType === 'compound') {
+                totalAmount = P * Math.pow((1 + r), t); // Annually compounded
+                interest = totalAmount - P;
+                typeCalculated = "Compound Interest (Annually)";
+            }
+            resultDiv.innerHTML = `<p><strong>Interest Type:</strong> ${typeCalculated}</p><p><strong>Estimated Interest:</strong> ₹ ${interest.toFixed(2)}</p><p><strong>Estimated Total Repayment:</strong> ₹ ${totalAmount.toFixed(2)}</p>`;
+        });
+    }
 
     // --- Footer Year ---
     const yearSpan = document.getElementById('year');
@@ -140,12 +168,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const translateLink = document.getElementById('translate-link-ta');
     if (translateLink) {
         const currentPageUrl = window.location.href;
-        const googleTranslateUrl = `https://translate.google.com/translate?sl=en&tl=ta&hl=en&u=${encodeURIComponent(currentPageUrl)}`; // Added hl=en for consistency
+        // Ensure the URL used for translation is the canonical one or the one you want translated
+        const googleTranslateUrl = `https://translate.google.com/translate?sl=en&tl=ta&hl=en&u=${encodeURIComponent(currentPageUrl.split('#')[0])}`; // Remove hash for base page translation
         translateLink.href = googleTranslateUrl;
-        // Setting target to '_self' explicitly to ensure inline opening
-        translateLink.target = '_self';
-        // Noopener/noreferrer not strictly needed for same-tab links but doesn't hurt
-        // translateLink.rel = "noopener noreferrer";
+        translateLink.target = '_self'; // Open in the same tab as per original logic
     }
+
+    // --- Scroll Reveal Animations for Elements ---
+    const animatedElements = document.querySelectorAll('.fade-in-element');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: unobserve after animation if you want it to trigger only once
+                // observer.unobserve(entry.target);
+            }
+            // Optional: remove 'is-visible' when element scrolls out of view
+            // else {
+            //     entry.target.classList.remove('is-visible');
+            // }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    animatedElements.forEach(el => revealObserver.observe(el));
+
+
+    // --- Resize Handler for Dynamic Offsets and Observer Re-init ---
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const oldOffset = currentScrollOffset;
+            updateScrollRelatedPaddings(); // This updates currentScrollOffset
+            if (Math.abs(currentScrollOffset - oldOffset) > 5) { // Only re-init if offset changed significantly
+                console.log("Re-initializing scrollspy observer due to resize. New Offset:", currentScrollOffset);
+                initScrollspyObserver();
+            }
+        }, 250); // Debounce resize event
+    });
 
 }); // End DOMContentLoaded

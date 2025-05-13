@@ -35,6 +35,8 @@ async function initChatWidget() {
     // Basic check for necessary libraries
     if (typeof Client === 'undefined') {
         console.error("Gradio Client library not loaded.");
+        showError("Chat feature unavailable (Client lib missing).");
+        if(chatToggle) chatToggle.disabled = true;
         return;
     }
      if (typeof marked === 'undefined') {
@@ -47,6 +49,8 @@ async function initChatWidget() {
     console.log(`[@gradio/client] Version check: ${Client.version || 'N/A'}`);
     if (!chatToggle || !chatContainer || !messagesContainer || !chatInput || !sendButton || !newChatButton || !closeChat || !errorDisplay || !langButtonEn || !langButtonTa) {
         console.error("Chat widget Init failed: Missing one or more HTML elements.");
+        if(chatToggle) chatToggle.disabled = true; // Disable toggle if essential parts are missing
+        showError("Chat widget setup error.");
         return;
     }
     addEventListeners();
@@ -58,27 +62,25 @@ async function initChatWidget() {
 async function connectClient() {
     if (isConnecting || gradioClient) return;
     isConnecting = true;
-    setLoadingState(true, "Connecting to Assistant..."); // More specific message
+    setLoadingState(true, "Connecting...");
     console.log("[connectClient] Connecting to:", gradioSpaceUrl);
     try {
-        // Explicitly specify protocol if needed, though usually included in URL
         gradioClient = await Client.connect(gradioSpaceUrl);
         console.log("[connectClient] Connected.");
         clearError();
         setLoadingState(false);
         if (messagesContainer && messagesContainer.children.length === 0) {
-            // Display welcome based on current language
             appendMessage(currentLanguage === 'en' ? "Hi! I'm Subha AI, your Sai Finance assistant. How can I help you today?" : "வணக்கம்! நான் சுபா AI, உங்கள் சாய் ஃபைனான்ஸ் உதவியாளர். நான் உங்களுக்கு எப்படி உதவ முடியும்?", 'bot');
         }
-        isConnecting = false;
+        chatToggle.setAttribute('aria-expanded', 'true');
     } catch (error) {
         console.error('[connectClient] CONNECTION FAILED:', error);
         const errorMsg = error instanceof Error ? error.message : 'Unknown connection error.';
-        // More user-friendly error
-        showError(`Could not connect to the assistant (${errorMsg}). Please try again later.`);
+        showError(`Could not connect: ${errorMsg}. Please try again.`);
         setLoadingState(false, "Connection failed");
+        gradioClient = null;
+    } finally {
         isConnecting = false;
-        gradioClient = null; // Ensure client is null on failure
     }
 }
 
@@ -97,9 +99,13 @@ function setLanguage(lang) {
     }
     if (chatInput) {
         chatInput.placeholder = placeholders[currentLanguage] || placeholders['en'];
+        chatInput.setAttribute('aria-label', `Type your message for Subha AI in ${currentLanguage === 'en' ? 'English' : 'Tamil'}`);
     }
-    // Optional: Start new chat on language switch?
-    // startNewChat(); // Uncomment if desired
+    // Consider if a new chat should start on language switch or if context should be maintained/translated.
+    // For simplicity, current behavior: new chat provides a fresh start in the new language.
+    // if (messagesContainer.children.length > 0) { // Only if chat has started
+    //     startNewChat();
+    // }
 }
 
 // --- Event Listener Setup ---
@@ -110,8 +116,7 @@ function addEventListeners() {
     if (sendButton) sendButton.addEventListener('click', handleSendMessage);
     if (chatInput) {
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); } });
-        // Connect on first focus if not already connecting/connected
-        chatInput.addEventListener('focus', () => { if (!gradioClient && !isConnecting) { connectClient(); } }, { once: true }); // Only trigger connect on first focus
+        chatInput.addEventListener('focus', () => { if (!gradioClient && !isConnecting) { connectClient(); } }, { once: true });
     }
     if (langButtonEn) langButtonEn.addEventListener('click', () => setLanguage('en'));
     if (langButtonTa) langButtonTa.addEventListener('click', () => setLanguage('ta'));
@@ -119,41 +124,55 @@ function addEventListeners() {
 
 // --- Chat Visibility ---
 function toggleChat() {
-    if (!chatContainer) return;
+    if (!chatContainer || !chatToggle) return;
     const isHidden = chatContainer.classList.contains('hidden');
     chatContainer.classList.toggle('hidden');
-    // If opening, try connecting and focus input
-    if (isHidden) {
+    chatToggle.setAttribute('aria-expanded', String(!isHidden));
+
+    if (!isHidden) { // If chat is now open
         if (!gradioClient && !isConnecting) {
             connectClient();
         }
         if (chatInput) {
-            setTimeout(() => chatInput.focus(), 50); // Short delay helps ensure focus works
+            setTimeout(() => chatInput.focus(), 50);
         }
     }
 }
-function hideChat() { if (chatContainer) chatContainer.classList.add('hidden'); }
+function hideChat() {
+    if (chatContainer) chatContainer.classList.add('hidden');
+    if (chatToggle) chatToggle.setAttribute('aria-expanded', 'false');
+}
 
 // --- New Chat Function ---
 function startNewChat() {
     console.log("[startNewChat] Starting new session...");
-    if (messagesContainer) messagesContainer.innerHTML = ''; // Clear messages
+    if (messagesContainer) messagesContainer.innerHTML = '';
     clearError();
-    // Provide initial message based on selected language
     appendMessage(currentLanguage === 'en' ? "New chat. How can I assist?" : "புதிய உரையாடல். நான் எப்படி உதவ முடியும்?", 'bot');
-    if (chatInput) chatInput.value = '';
-    setLoadingState(false); // Reset loading state
-    if (chatInput) chatInput.focus();
-    // Optional: Reconnect client if sessions are handled server-side or state needs reset
-    // gradioClient = null; connectClient();
+    if (chatInput) {
+        chatInput.value = '';
+        chatInput.focus();
+    }
+    setLoadingState(false);
+    // Optional: If sessions are strictly managed server-side and need a full reset.
+    // if (gradioClient) {
+    //     // gradioClient.resetSession(); // or similar if API supports
+    // }
 }
 
-// --- Message Handling (Prepends Language Instruction) ---
+// --- Message Handling ---
 async function handleSendMessage() {
     console.log("[handleSendMessage] Attempting send. State:", { isConnecting, isWaitingForResponse, hasClient: !!gradioClient, lang: currentLanguage });
     if (isConnecting) { console.warn("Send aborted: Still connecting."); return; }
     if (isWaitingForResponse) { console.warn("Send aborted: Waiting for previous response."); return; }
-    if (!gradioClient) { console.error("Send failed: Gradio client not connected."); showError("Not connected. Please wait or click input field."); connectClient(); return; } // Attempt reconnect
+    if (!gradioClient) {
+        showError("Not connected. Trying to connect...");
+        await connectClient(); // Attempt to connect
+        if (!gradioClient) { // If still not connected after attempt
+             showError("Connection failed. Please try again.");
+             return;
+        }
+    }
     if (!chatInput || !messagesContainer) { console.error("Send failed: Missing Input/Message elements."); return; }
 
     const userMessageOriginal = chatInput.value.trim();
@@ -162,7 +181,7 @@ async function handleSendMessage() {
     appendMessage(userMessageOriginal, 'user');
     chatInput.value = '';
     scrollToBottom();
-    setLoadingState(true, "Processing...");
+    setLoadingState(true, "Thinking...");
     const thinkingIndicator = appendMessage("Thinking...", 'bot', true);
     clearError();
 
@@ -170,7 +189,7 @@ async function handleSendMessage() {
     if (currentLanguage === 'ta') { messageToSend = `Please respond ONLY in Tamil (தமிழ்): ${userMessageOriginal}`; }
     else { messageToSend = `Please respond ONLY in English: ${userMessageOriginal}`; }
 
-    const payload = { message: { "text": messageToSend, "files": [] } };
+    const payload = { message: { "text": messageToSend, "files": [] } }; // Ensure payload matches Gradio expectation
     console.log("[handleSendMessage] Calling predict with payload:", JSON.stringify(payload));
 
     try {
@@ -178,35 +197,35 @@ async function handleSendMessage() {
         console.log("[handleSendMessage] Received Result:", JSON.stringify(result));
 
         let botMessageText = null;
-        // Adjust parsing based on actual Gradio component output structure
         if (result?.data?.[0]) {
             const firstItem = result.data[0];
-             // Check if the output might be nested (e.g., within another array or object)
              if (Array.isArray(firstItem) && firstItem.length > 0 && typeof firstItem[0] === 'string') {
-                botMessageText = String(firstItem[0]).trim(); // Handle [[response]] case
-                 console.log("[handleSendMessage] Parsed nested array string.");
+                botMessageText = String(firstItem[0]).trim();
              } else if (typeof firstItem === 'string') {
-                botMessageText = String(firstItem).trim(); // Handle [response] case
-                console.log("[handleSendMessage] Parsed direct string.");
+                botMessageText = String(firstItem).trim();
             } else {
                  console.warn("[handleSendMessage] result.data[0] is not a string or expected structure:", firstItem);
-                 botMessageText = String(firstItem); // Fallback conversion
+                 botMessageText = String(firstItem); // Fallback
             }
         } else { console.warn("[handleSendMessage] Invalid result structure:", result); }
 
         if (thinkingIndicator) thinkingIndicator.remove();
 
         if (botMessageText) { appendMessage(botMessageText, 'bot'); }
-        else { console.error("[handleSendMessage] Failed to parse valid message."); appendMessage('Sorry, I received an unclear response from the assistant.', 'bot'); showError("Received unclear response."); }
+        else {
+            console.error("[handleSendMessage] Failed to parse valid message.");
+            appendMessage('Sorry, I received an unclear response.', 'bot');
+            showError("Received unclear response.");
+        }
 
     } catch (error) {
         console.error('[handleSendMessage] ERROR during predict call:', error);
         if (thinkingIndicator) thinkingIndicator.remove();
-        let errorMsg = 'Sorry, the assistant encountered a problem processing your request.'; // Default user-friendly message
-        if (error instanceof Error) { errorMsg = `Error: ${error.message}`; } // Get specific message if available
+        let errorMsg = 'Sorry, an error occurred while processing your request.';
+        if (error instanceof Error) { errorMsg = `Error: ${error.message}`; }
         else if (typeof error === 'object' && error !== null && error.message) { errorMsg = `Error: ${error.message}`; }
         appendMessage(errorMsg, 'bot');
-        showError("Couldn't get response. Please try again."); // Simple error for user
+        showError("Couldn't get response. Please try again.");
     } finally { setLoadingState(false); scrollToBottom(); }
 }
 
@@ -218,49 +237,36 @@ function appendMessage(text, sender, isThinking = false) {
     messageDiv.classList.add('message', `${sender}-message`);
     if (isThinking) {
         messageDiv.classList.add('thinking');
-        messageDiv.setAttribute('role', 'status'); // Accessibility for screen readers
+        messageDiv.setAttribute('role', 'status');
     }
 
-    const messageText = String(text || ''); // Ensure it's a string
+    const messageText = String(text || '');
 
     if (sender === 'bot' && typeof marked !== 'undefined') {
         try {
-            // 1. Parse Markdown to HTML using marked.js
             const rawHtml = marked.parse(messageText);
-
-            // 2. Sanitize the HTML using DOMPurify (assuming it's loaded)
-            let cleanHtml = rawHtml; // Default to raw if sanitizer not found
+            let cleanHtml = rawHtml;
             if (typeof DOMPurify !== 'undefined') {
                  cleanHtml = DOMPurify.sanitize(rawHtml);
-                 // console.log("DOMPurify sanitized HTML."); // Optional: for debugging
             } else {
                  console.warn("DOMPurify not found. Rendering raw HTML from Markdown. Ensure source is trusted.");
-                 // Basic script tag removal as a minimal fallback (less effective than DOMPurify)
                  cleanHtml = rawHtml.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
             }
-
-            // 3. Set the sanitized HTML content
-            messageDiv.innerHTML = cleanHtml; // **** USE innerHTML to render HTML ****
-
+            messageDiv.innerHTML = cleanHtml;
         } catch (e) {
             console.error("Markdown parsing/sanitizing error:", e);
-            messageDiv.textContent = messageText; // Fallback to textContent on error
+            messageDiv.textContent = messageText;
         }
     } else {
-        // User messages or if marked/DOMPurify unavailable, use textContent
         messageDiv.textContent = messageText;
     }
 
     messagesContainer.appendChild(messageDiv);
-    // Don't scroll automatically if user has scrolled up
-    // if (messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50) {
-        scrollToBottom();
-    // }
+    scrollToBottom();
     return messageDiv;
 }
 
 function scrollToBottom() {
-    // Add a small delay to allow the DOM to update before scrolling
     setTimeout(() => {
         if (messagesContainer) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -268,7 +274,7 @@ function scrollToBottom() {
     }, 50);
 }
 
-function setLoadingState(isLoading, message = "...") { // Use simple "..." for loading
+function setLoadingState(isLoading, message = "...") {
     isWaitingForResponse = isLoading;
     if (chatInput) {
         chatInput.disabled = isLoading;
