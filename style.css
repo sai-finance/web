@@ -1,4 +1,4 @@
-/* style.css - Enhanced Version */
+/* style.css - Enhanced Version with Founder Contact */
 
 /* --- Root Variables (Purple/Pink Header Gradient Theme) --- */
 :root {
@@ -7,8 +7,10 @@
     /* Purple-to-Pink Gradient Colors */
     --purple-color: #a770ef; --pink-color: #ef476f;
     /* Solid Button Colors */
-    --hero-apply-solid: #7e5bef; --hero-inquiry-solid: var(--purple-color); --contact-inquiry-solid: var(--purple-color);
-    --hero-apply-solid-hover: #6a4acf; --hero-inquiry-solid-hover: #935ce6; --contact-inquiry-solid-hover: #935ce6;
+    --hero-apply-solid: #7e5bef; /* --hero-inquiry-solid: var(--purple-color); */ /* Removed as button is gone */
+    --contact-inquiry-solid: var(--purple-color);
+    --hero-apply-solid-hover: #6a4acf; /* --hero-inquiry-solid-hover: #935ce6; */
+    --contact-inquiry-solid-hover: #935ce6;
     /* Gradients */
     --gradient-hero: linear-gradient(100deg, #001f44 0%, var(--primary-color) 100%);
     --gradient-header-btn-logo: linear-gradient(to right, var(--purple-color) 0%, var(--pink-color) 100%); /* Purple to Pink */
@@ -53,9 +55,9 @@ a:focus-visible { outline: 2px solid var(--focus-ring-color); outline-offset: 2p
 .apply-header-btn { padding: 6px 14px; font-size: 0.9rem; box-shadow: var(--shadow-sm); }
 .apply-header-btn:hover { box-shadow: var(--shadow-md); }
 /* Solid Buttons */
-.hero-inquiry-btn { background-color: var(--hero-inquiry-solid); }
-.hero-inquiry-btn:hover { background-color: var(--hero-inquiry-solid-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.contact-inquiry-btn { background-color: var(--contact-inquiry-solid); }
+/* .hero-inquiry-btn { background-color: var(--hero-inquiry-solid); } */ /* Removed */
+/* .hero-inquiry-btn:hover { background-color: var(--hero-inquiry-solid-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); } */ /* Removed */
+.contact-inquiry-btn { background-color: var(--contact-inquiry-solid); } /* Kept if used elsewhere, but removed from contact section */
 .contact-inquiry-btn:hover { background-color: var(--contact-inquiry-solid-hover); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 /* Other Buttons */
 .experian-btn { background-color: var(--accent-color-cyan); }
@@ -115,7 +117,7 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .hero { display: flex; align-items: center; justify-content: center; background-color: var(--primary-color); background-image: var(--gradient-hero); min-height: 85vh; padding-top: 60px; padding-bottom: 60px; text-align: center; overflow: hidden; }
 .hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; color: var(--white-color); font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 .hero .subtitle { font-size: clamp(1rem, 3vw, 1.3rem); margin-bottom: 2rem; color: var(--white-color); opacity: 0.9; }
-.hero-buttons .btn { margin: 0.5rem; }
+.hero-buttons .btn { margin: 0.5rem; } /* Only one button remains */
 .about p { max-width: 800px; margin: 0.8rem auto; text-align: center; }
 .our-impact { margin-top: 40px; padding: 30px; background-color: var(--light-blue-bg); border-left: 5px solid var(--primary-color); }
 .our-impact h3 { text-align: center; color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem; }
@@ -190,30 +192,99 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .faq-list { max-width: 850px; margin: 0 auto; }
 .faq-item { margin-bottom: 1rem; background: var(--white-color); border-radius: var(--border-radius); border: 1px solid var(--border-color); transition: box-shadow 0.3s ease; }
 .faq-item:hover { box-shadow: var(--shadow-sm); }
-.faq-item summary { cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem 1.5rem; position: relative; outline: none; transition: background-color 0.2s ease; list-style: none; /* Hides default marker in most browsers */ }
-.faq-item summary::-webkit-details-marker { display: none; } /* Chrome/Safari */
-.faq-item summary::marker { display: none; } /* Firefox - though sometimes list-style:none is enough */
+.faq-item summary { cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem 1.5rem; position: relative; outline: none; transition: background-color 0.2s ease; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker { display: none; }
 .faq-item summary:hover { background-color: #f0f0f0; }
 .faq-item summary:focus-visible { outline: 2px solid var(--focus-ring-color); outline-offset: 2px; border-radius: var(--border-radius); }
-.faq-item summary::before { content: ''; display: inline-block; width: 10px; /* Spacing for custom arrow */ }
+.faq-item summary::before { content: ''; display: inline-block; width: 10px; }
 .faq-item summary::after { content: '▼'; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%) rotate(0deg); transition: transform 0.3s ease-in-out; color: var(--primary-color); font-size: 0.8em; }
 .faq-item[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
 .faq-item p { padding: 1rem 1.5rem; margin: 0; border-top: 1px solid var(--border-color); }
+
+/* Contact Section Enhancements */
 .contact { background-color: var(--white-color); text-align: center; }
-.contact-info { margin: 30px auto; padding: 25px; line-height: 1.9; max-width: 600px; border-left: 5px solid var(--secondary-color); text-align: left; /* Applied .card styles in HTML */ }
-.contact-info p { margin: 0.6rem 0; }
+.contact .section-subtitle { margin-bottom: 30px; }
+
+.contact-methods-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-info {
+    text-align: left;
+    border-left: 5px solid var(--secondary-color);
+    padding: 25px; /* Ensure padding is consistent with other cards */
+}
+.contact-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+.contact-info p { margin: 0.8rem 0; }
 .contact-info strong { color: var(--dark-text-color); }
 .contact-info a { font-weight: 600; color: var(--secondary-color); }
-.contact-buttons { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; }
+.contact-apply-button {
+    margin-top: 20px;
+    text-align: center; /* Center button if needed */
+}
+
+.founder-contact-form {
+    text-align: left;
+    border-top: 5px solid var(--purple-color); /* Differentiate visually */
+    padding: 25px;
+}
+.founder-contact-form h3 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+.founder-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.founder-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--purple-color);
+    box-shadow: var(--shadow-sm);
+}
+.founder-intro p {
+    font-size: 0.95rem;
+    color: var(--medium-text-color);
+    max-width: 500px;
+}
+
+.google-form-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 700px; /* Max width for the form itself */
+    margin: 0 auto; /* Center the form container */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+.google-form-container iframe {
+    width: 100%;
+    min-height: 800px; /* Adjust based on your form's typical height */
+    border: none; /* Remove iframe's own border */
+    margin: 0;
+    padding: 0;
+    display: block; /* Remove extra space below iframe */
+}
 
 /* Footer */
 .footer {
-    background: var(--primary-color); /* Deep blue footer */
-    color: var(--light-gray-bg);
-    text-align: center;
-    padding: 1.5rem 1rem; /* Adjusted padding */
-    margin-top: auto;
-    font-size: 0.9rem;
+    background: var(--primary-color); color: var(--light-gray-bg);
+    text-align: center; padding: 1.5rem 1rem; margin-top: auto; font-size: 0.9rem;
 }
 .footer .container { max-width: 900px; }
 .footer p { margin: 8px 0; line-height: 1.6; }
@@ -234,7 +305,7 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 @keyframes pulseGlow { 0% { opacity: 0.7; transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(167, 112, 239, 0.5); } 50% { opacity: 0.4; transform: scale(1); box-shadow: 0 0 25px 10px rgba(239, 71, 111, 0.4); } 100% { opacity: 0.7; transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(167, 112, 239, 0.5); } }
 .chat-toggle { position: relative; z-index: 2; width: auto; border-radius: 25px; padding: 10px 18px; background-color: var(--purple-color); background-image: var(--gradient-header-btn-logo); border: none; color: white; cursor: pointer; font-size: 0.95rem; font-weight: 600; line-height: 1.2; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: background-image 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; overflow: visible; }
 .chat-toggle::before { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 30px; background-image: var(--gradient-header-btn-logo); filter: blur(15px); opacity: 0; z-index: -1; animation: pulseGlow 2.5s ease-in-out infinite; pointer-events: none; }
-.chat-toggle:focus-visible { /* Custom focus for toggle since ::before might obscure standard outline */ box-shadow: 0 0 0 3px var(--white-color), 0 0 0 5px var(--focus-ring-color); }
+.chat-toggle:focus-visible { box-shadow: 0 0 0 3px var(--white-color), 0 0 0 5px var(--focus-ring-color); }
 .chat-toggle i { font-size: 1.1em; }
 .chat-container { position: fixed; bottom: 80px; right: 20px; width: 320px; max-width: 90vw; height: 450px; max-height: calc(100vh - 100px); background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease; opacity: 0; transform: translateY(20px); visibility: hidden; pointer-events: none; }
 .chat-container:not(.hidden) { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
@@ -276,15 +347,15 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 
 
 /* --- Responsive Design --- */
-@media (max-width: 1180px) { /* Wider breakpoint for nav changes */
+@media (max-width: 1180px) {
     html { font-size: 15px; }
-    .header { /* Allow header to grow if content wraps */ height: auto; min-height: var(--header-height); }
-    .header-container { flex-wrap: wrap; padding-bottom: 10px; justify-content: space-between; align-items: center; } /* Ensure vertical alignment */
+    .header { height: auto; min-height: var(--header-height); }
+    .header-container { flex-wrap: wrap; padding-bottom: 10px; justify-content: space-between; align-items: center; }
     .logo { order: 1; margin-right: auto; }
-    .mobile-menu-toggle { order: 2; display: block; margin-left: 10px; /* Keep some space */ }
-    .apply-header-btn { order: 3; margin-left: 0; /* Remove margin if toggle is present */ }
+    .mobile-menu-toggle { order: 2; display: block; margin-left: 10px; }
+    .apply-header-btn { order: 3; margin-left: 0; }
     .navbar { order: 4; width: 100%; margin: 10px 0 0 0; display: none; overflow: visible; height: auto; background-color: var(--white-color); box-shadow: var(--shadow-sm); border-top: 1px solid var(--border-color); }
-    .navbar.active { display: block; position: absolute; top: 100%; /* Position below the wrapped header-container */ left:0; right:0; z-index: 999; /* Ensure it's above content but below chat widget */}
+    .navbar.active { display: block; position: absolute; top: 100%; left:0; right:0; z-index: 999; }
     .navbar.active ul { display: flex; flex-direction: column; gap: 0; width: 100%; text-align: left; }
     .navbar.active .nav-link { width: 100%; padding: 12px 15px; border-bottom: 1px solid var(--border-color); font-size: 1rem; text-align: left; white-space: normal; }
     .navbar.active .nav-link:last-child { border-bottom: none; }
@@ -292,18 +363,20 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
     .section-title { font-size: 1.9rem; }
 }
 
-@media (max-width: 768px) {
-    /* Default body padding and header top position (relative to top-bar) are maintained. */
-    /* No need to override html scroll-padding-top, body padding-top, or header top here as defaults work. */
-
-    /* #top-bar { display: block; } */ /* This default is display:flex, let's keep it flex for its container */
-    .top-bar-container {
-        padding-left: 10px; /* Reduce padding slightly */
-        padding-right: 10px;
+@media (max-width: 992px) { /* For contact section layout change */
+    .contact-methods-wrapper {
+        flex-direction: column; /* Stack on medium screens and below */
     }
-    .top-bar-text { display: none; } /* Hide text in top bar on smaller screens */
-    .top-bar-translate i, .top-bar-whatsapp i { margin-right: 0; } /* Remove margin when text hidden */
+    .contact-info, .founder-contact-form {
+        width: 100%; /* Take full width when stacked */
+    }
+}
 
+
+@media (max-width: 768px) {
+    .top-bar-container { padding-left: 10px; padding-right: 10px; }
+    .top-bar-text { display: none; }
+    .top-bar-translate i, .top-bar-whatsapp i { margin-right: 0; }
     .hero { padding-top: 40px; min-height: 60vh; }
     .hero h1 { font-size: 2rem; }
     .section-padding { padding: 40px 0; }
@@ -314,6 +387,17 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
     .interest-content, .eligibility-content { flex-direction: column; align-items: stretch; gap: 20px; }
     .interest-content > div, .eligibility-content > .card { flex-basis: auto; width: 100%; }
     .calculator-form { padding: 20px; }
+
+    .founder-intro {
+        flex-direction: column; /* Stack photo and text */
+        align-items: center;
+    }
+    .founder-photo {
+        margin-bottom: 15px;
+    }
+    .google-form-container iframe {
+        min-height: 750px; /* Adjust for smaller screens if form content wraps more */
+    }
 }
 
 @media (max-width: 480px) {
@@ -323,20 +407,20 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
     .logo-text { font-size: 1.2rem; }
     .apply-header-btn { padding: 5px 8px; font-size: 0.75rem; }
     .mobile-menu-toggle { font-size: 1.6rem; }
-
     .hero h1 { font-size: 1.8rem; }
     .hero .subtitle { font-size: 0.9rem; }
     .btn { padding: 0.6rem 1.1rem; font-size: 0.9rem;}
     .section-title { font-size: 1.6rem; }
     .service-list { grid-template-columns: 1fr; }
     .quick-links li a { padding: 6px 14px; font-size: 0.9rem;}
-    .faq-item summary { padding-right: 30px; } /* Ensure space for arrow */
+    .faq-item summary { padding-right: 30px; }
     .faq-item summary::after { right: 1rem; }
-
-    /* Chat Widget adjustments for small screens */
     .chat-container { width: calc(100vw - 30px); right: 15px; bottom: 70px; height: 70vh; max-height: calc(100vh - 80px); }
     .chat-toggle { right: 15px; bottom: 15px; padding: 8px 15px; }
     .message { max-width: 90%; }
+    .google-form-container iframe {
+        min-height: 700px; /* Further adjust if needed */
+    }
 }
 
 /* --- Responsive Footer --- */
@@ -344,7 +428,6 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
     .footer { padding: 1rem; }
     .ai-disclaimer { font-size: 0.8rem; }
 }
-
 @media (max-width: 480px) {
     .footer p { font-size: 0.85rem; }
     .ai-disclaimer { font-size: 0.75rem; }
