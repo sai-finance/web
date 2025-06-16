@@ -62,12 +62,11 @@ a:focus-visible { outline: 2px solid var(--focus-ring-color); outline-offset: 2p
 /* --- Top Bar --- */
 #top-bar { background-color: var(--primary-color); color: var(--white-color); padding: 5px 0; height: var(--top-bar-height); position: fixed; width: 100%; top: 0; z-index: 1001; display: flex; align-items: center; }
 .top-bar-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-.top-bar-translate a, .top-bar-whatsapp a { display: flex; align-items: center; text-decoration: none; color: var(--white-color); font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease; }
-.top-bar-translate a:hover, .top-bar-whatsapp a:hover { opacity: 0.85; text-decoration: none; }
-.top-bar-translate i, .top-bar-whatsapp i { font-size: 1.4rem; margin-right: 8px; }
+.top-bar-left, .top-bar-right { display: flex; align-items: center; gap: 20px; }
+.top-bar-translate a, .top-bar-whatsapp a, .top-bar-admin a { color: var(--white-color); text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; transition: color 0.3s ease; }
+.top-bar-translate a:hover, .top-bar-whatsapp a:hover, .top-bar-admin a:hover { color: var(--accent-color-cyan); text-decoration: none; }
+.top-bar-translate i, .top-bar-whatsapp i, .top-bar-admin i { font-size: 1.1rem; }
 .top-bar-whatsapp .whatsapp-icon { color: #25D366; }
-.top-bar-translate .fa-language { color: var(--white-color); }
-.top-bar-text { display: inline; }
 
 /* --- Header / Navigation --- */
 .header { background: var(--white-color); box-shadow: var(--shadow-sm); position: fixed; width: 100%; top: var(--top-bar-height); z-index: 1000; height: var(--header-height); display: flex; align-items: center; transition: height 0.3s ease-in-out; }
@@ -369,11 +368,8 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 .footer a { color: var(--accent-color-cyan); text-decoration: underline; }
 .footer a:hover { color: var(--white-color); text-decoration: underline; opacity: 1; }
 
-
-/* ======================================== */
-/* === START: CHAT WIDGET CSS           === */
-/* ======================================== */
-.chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1100; }
+/* --- Chat Widget --- */
+.chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1010; }
 @keyframes pulseGlow { 0% { opacity: 0.7; transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(167, 112, 239, 0.5); } 50% { opacity: 0.4; transform: scale(1); box-shadow: 0 0 25px 10px rgba(239, 71, 111, 0.4); } 100% { opacity: 0.7; transform: scale(1.05); box-shadow: 0 0 15px 5px rgba(167, 112, 239, 0.5); } }
 .chat-toggle { position: relative; z-index: 2; width: auto; border-radius: 25px; padding: 10px 18px; background-color: var(--purple-color); background-image: var(--gradient-header-btn-logo); border: none; color: white; cursor: pointer; font-size: 0.95rem; font-weight: 600; line-height: 1.2; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); transition: background-image 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; overflow: visible; }
 .chat-toggle::before { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 30px; background-image: var(--gradient-header-btn-logo); filter: blur(15px); opacity: 0; z-index: -1; animation: pulseGlow 2.5s ease-in-out infinite; pointer-events: none; }
@@ -413,10 +409,6 @@ section:nth-child(even) { background-color: var(--light-gray-bg); }
 #send-message:hover { background-color: var(--primary-color); }
 #send-message:disabled { background-color: #a0cfff; cursor: not-allowed; opacity: 0.7; }
 #send-message:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 1px; }
-/* ======================================== */
-/* === END: CHAT WIDGET CSS             === */
-/* ======================================== */
-
 
 /* --- Responsive Design --- */
 @media (max-width: 1180px) {
